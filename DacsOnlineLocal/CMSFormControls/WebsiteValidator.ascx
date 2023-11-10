@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="WebsiteValidator.ascx.cs" Inherits="CMSFormControls_WebsiteValidator" %>
+<asp:TextBox ID="TxtWebsiteValidator" runat="server" class="text"></asp:TextBox>        

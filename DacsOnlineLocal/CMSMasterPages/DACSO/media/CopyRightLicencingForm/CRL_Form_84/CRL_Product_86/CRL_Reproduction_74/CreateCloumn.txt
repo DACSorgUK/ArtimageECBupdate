@@ -1,0 +1,168 @@
+ public void BtnGetReminderListClick(object sender, EventArgs e)
+        {
+            DeclarationTemplateField field;
+             field = new DeclarationTemplateField()
+            {
+                Name = "Employment-Section1",
+                Type = "Note",
+                IsPublic = true,
+                Order = 0,
+                DisplayName = "Employment,office, trade, profession or vocation",
+                Description = ".",
+                Subtitle = "Employment details",
+                Hint = "Any employment, office, trade, profession or vocation carried on for profit or gain.",
+                Required = false
+            };
+
+             CreateColoum(field);
+
+
+             field = new DeclarationTemplateField()
+             {
+                 Name = "Sponsorship-Section3",
+                 Type = "Note",
+                 IsPublic = true,
+                 Order = 0,
+                 DisplayName = "Sponsorship",
+                 Description = ".",
+                 Subtitle = "Payment received",
+                 Hint = "Any payment or provision of any other financial benefit (other than from the relevant authority) made or provided within the relevant period in respect of any expenses incurred by you in carrying out duties as a member, or towards your election expenses. This includes any payment or financial benefit from a trade union within the meaning of the Trade Union and Labour Relations (Consolidation) Act 1992(1).",
+                 Required = false
+             };
+
+             CreateColoum(field);
+
+             field = new DeclarationTemplateField()
+             {
+                 Name = "Securities-Section4",
+                 Type = "Note",
+                 IsPublic = true,
+                 Order = 0,
+                 DisplayName = "Securities",
+                 Description = ".",
+                 Subtitle = "",
+                 Hint = "Any beneficial interest in securities of a body where: "+
+                         "(a)	That body (to your knowledge) has a place of business or land in the area of the relevant authority; and "+
+                        "(b)	Either;"+
+                        "(i)	The total nominal value of the securities exceeds £25,000 or one hundredth of the total issued share capital of that body; or "+
+                        "(ii)	If the share capital of that body is of more than one class, the total nominal value of the shares of any one class in which the relevant person has a beneficial interest exceeds one hundredth of the total issued share capital of that class.",
+                 Required = false
+             };
+
+             CreateColoum(field);
+
+             field = new DeclarationTemplateField()
+             {
+                 Name = "Contracts-Section5",
+                 Type = "Note",
+                 IsPublic = true,
+                 Order = 0,
+                 DisplayName = "Contracts",
+                 Description = ".",
+                 Subtitle = "Goods, Services or Works",
+                 Hint = "Any contract which is made between you  or the relevant person (or a body in which the relevant person has a beneficial interest) and the relevant authority : "+
+                        "(a)	Under which goods or services are to be provided or works are to be executed; and "+
+                        "(b)	Which has not been fully discharged.",
+                 Required = false
+             };
+
+             CreateColoum(field);
+
+             field = new DeclarationTemplateField()
+             {
+                 Name = "Land-Section6",
+                 Type = "Note",
+                 IsPublic = true,
+                 Order = 0,
+                 DisplayName = "Land",
+                 Description = ".",
+                 Subtitle = "Address",
+                 Hint = "Any beneficial interest in land which is within the area of the relevant authority.",
+                 Required = false
+             };
+
+             CreateColoum(field);
+
+             field = new DeclarationTemplateField()
+             {
+                 Name = "Licences-Section8",
+                 Type = "Note",
+                 IsPublic = true,
+                 Order = 0,
+                 DisplayName = "Licences",
+                 Description = ".",
+                 Subtitle = "Address",
+                 Hint = "Any licence (alone or jointly with others) to occupy land in the area of the relevant authority for a month or longer.",
+                 Required = false
+             };
+
+             CreateColoum(field);
+
+             field = new DeclarationTemplateField()
+             {
+                 Name = "Corporate Tenancies",
+                 Type = "Note",
+                 IsPublic = true,
+                 Order = 0,
+                 DisplayName = "Corporate Tenancies",
+                 Description = ".",
+                 Subtitle = "Address",
+                 Hint = "Any tenancy where (to  your knowledge): "+
+                        "(a)	The landlord is the relevant authority; and "+
+                        "(b)	The tenant is a body in which the relevant person has a beneficial interest.",
+                 Required = false
+             };
+
+             CreateColoum(field);
+
+            //DtatBind();
+        }
+
+
+        private void CreateColoum(DeclarationTemplateField field)
+        {
+
+            using (SPSite site = new SPSite("http://council.islington.gov.uk/rdt/GND/rdtdeclarations/"))
+            {
+                using (SPWeb web1 = site.OpenWeb())
+                {
+
+                    SPList list = web1.Lists["Declarations"];
+                    SPField internalName = null; ;
+
+                    
+
+                    var webFields = list.ParentWeb.Fields;
+
+
+                    var newFieldName = webFields.AddFieldAsXml(field.GetCaml());
+                    internalName = webFields.GetFieldByInternalName(field.InternalName);
+                    var decField = internalName as DeclarationField;
+                    if (null != decField)
+                    {
+                        decField.IsPublic = field.IsPublic;
+                        decField.Hint = field.Hint;
+                        decField.Subtitle = field.Subtitle;
+                        decField.Required = field.Required;
+                    }
+
+                    internalName.Update();
+
+                    var link = new SPFieldLink(internalName)
+                    {
+                        DisplayName = field.DisplayName
+                    };
+
+                    SPContentTypeCollection cts = web1.ContentTypes;
+                    SPContentType ct = cts["Member Part A Declaration"];
+                    ct.FieldLinks.Add(link);
+                    // calling the update with true will copy the changes from
+                    // site content types to all list content type instance
+                    ct.Update(true);
+
+
+                }
+
+            }
+
+        }

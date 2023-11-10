@@ -1,0 +1,12 @@
+﻿.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 0px;
+    background-color: #FFF;
+    border: 1px solid #A4A7A9;
+    min-height: 32px;
+}
+
+.select2-dropdown {
+    border-radius: 0px;
+}

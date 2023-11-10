@@ -1,0 +1,594 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using CMS.CMSHelper;
+using CMS.GlobalHelper;
+using CMS.PortalControls;
+using CMS.SettingsProvider;
+using CMS.SiteProvider;
+using System.Data;
+using System.IO;
+using System.IO.Packaging;
+using CMS.LicenseProvider;
+
+using CMS.TreeEngine;
+
+using CMS.UIControls;
+using CMS.WorkflowEngine;
+using CMS.EventLog;
+using System.Xml;
+
+public partial class DACS_ImportArtistPagePre : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    const string CUSTOM_TABLE_SYSTEM_FIELDS = "DELETE;UPDATE;INSERT;ItemID;ItemGUID;ItemCreatedBy;ItemCreatedWhen;ItemModifiedBy;ItemModifiedWhen;ItemOrder";
+    const string EVENT_LOG_SOURCE = "CT_DATA_IMPORT";
+
+    #region Public Properties
+
+    public string FileStoragePath
+    {
+        get
+        {
+            string path = "";// ValidationHelper.GetString(GetValue("FileStoragePath"), "/" + CMSContext.CurrentSiteName + "/media/");
+                             //return string.IsNullOrEmpty(path) ? "/" + CMSContext.CurrentSiteName + "/ImportArtist/" : path;
+            return string.IsNullOrEmpty(path) ? "/DACSO/ImportArtist/" : path;
+        }
+        //set
+        //{
+        //    SetValue("FileStoragePath", value);
+        //}
+
+    }
+
+    #endregion
+
+    #region Page Events and Methods
+
+    protected void btnImport_Click(object sender, EventArgs e)
+    {
+        lblMessage.Text = ExecuteImport();
+    }
+
+    #endregion
+
+    #region Private Methods: business logic
+
+    /// <summary>
+    /// Calls all operation needed to import data from file to a custom table
+    /// </summary>
+    private string ExecuteImport()
+    {
+        string message = string.Empty;
+        if (!ValidateInput(out message))
+        {
+            return message;
+        }
+
+        try
+        {
+            string path = UploadExcelFile();
+
+            if (string.IsNullOrEmpty(path))
+            {
+                return "Error: Unable to read file. ";
+            }
+            DataTable data = ReadExceldata(path, txtDatasheetName.Text.Trim());
+
+            //for (int i = data.Rows.Count - 1; i >= 0; i--)
+            //{
+            //    if (string.IsNullOrEmpty(data.Rows[i][10].ToString()) && string.IsNullOrEmpty(data.Rows[i][11].ToString()))
+            //        data.Rows[i].Delete();
+            //}
+
+            if (data == null)
+            {
+                return "Error: No data to import. ";
+            }
+            ImportData(tableSelect.Value.ToString(), data, false);//chkOverride.Checked
+
+            return "Import completed successfully.";
+        }
+        catch (Exception ex)
+        {
+            CMS.EventLog.EventLogProvider.LogException(EVENT_LOG_SOURCE, "ExecuteImport", ex);
+            return "Error: " + ex.Message;
+        }
+
+    }
+
+    //private string ExecuteImport2()
+    //{
+    //    string message = string.Empty;
+    //    if (!ValidateInput(out message))
+    //    {
+    //        return message;
+    //    }
+
+    //    try
+    //    {
+    //        string path = UploadExcelFile();
+
+    //        if (string.IsNullOrEmpty(path))
+    //        {
+    //            return "Error: Unable to read file. ";
+    //        }
+
+    //        using (FileStream stream = File.Open(path, FileMode.Open, FileAccess.Read))
+    //        {
+    //            IExcelDataReader myReader = null;
+
+    //            if (Path.GetExtension(path) == ".xls")
+    //            {
+    //                myReader = ExcelReaderFactory.CreateBinaryReader(stream);
+    //            }
+    //            else
+    //            {
+    //                myReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+    //            }
+
+    //            myReader.IsFirstRowAsColumnNames = true;
+    //            myReader.Read();
+
+    //            ImportData2(tableSelect.Value.ToString(), myReader);
+    //        }
+
+    //        //if (data == null)
+    //        //{
+    //        //    return "Error: No data to import. ";
+    //        //}
+    //        // ImportData(tableSelect.Value.ToString(), data, false);//chkOverride.Checked
+
+    //        return "Import completed successfully.";
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        CMS.EventLog.EventLogProvider.LogException(EVENT_LOG_SOURCE, "ExecuteImport", ex);
+    //        return "Error: " + ex.Message;
+    //    }
+
+    //}
+
+    /// <summary>
+    /// Validated input data
+    /// </summary>
+    /// <param name="error">Error description</param>
+    /// <returns>Input is valid statement</returns>
+    private bool ValidateInput(out string error)
+    {
+        error = "";
+        if (!fileUpload.HasFile)
+        {
+            error = "Please select a file.";
+            return false;
+        }
+        if (!fileUpload.FileName.Contains(".xls"))
+        {
+            error = "Please select Excel file.";
+            return false;
+        }
+        if (string.IsNullOrEmpty(txtDatasheetName.Text.Trim()))
+        {
+            error = "Please specify Sheet name.";
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Uploads Excel file
+    /// </summary>
+    /// <returns>File full path</returns>
+    private string UploadExcelFile()
+    {
+        if (fileUpload.HasFile && (Path.GetExtension(fileUpload.FileName) == ".xls" || Path.GetExtension(fileUpload.FileName) == ".xlsx"))
+        {
+            try
+            {
+                string pathAndName = string.Empty;
+                if (FileStoragePath.EndsWith("/"))
+                {
+                    pathAndName = Server.MapPath(FileStoragePath + fileUpload.FileName);
+                }
+                else
+                {
+                    pathAndName = Server.MapPath(string.Format("{0}/{1}", FileStoragePath, fileUpload.FileName));
+                }
+                fileUpload.SaveAs(pathAndName);
+                CMS.EventLog.EventLogProvider.LogInformation(EVENT_LOG_SOURCE, "Upload", "File uploaded");
+                return pathAndName;
+            }
+            catch (Exception ex)
+            {
+                CMS.EventLog.EventLogProvider.LogException(EVENT_LOG_SOURCE, "Upload", ex);
+                throw new ApplicationException("Failed to upload file.", ex);
+            }
+        }
+        else
+        {
+            lblMessage.Text = "Please select Excel file. ";
+            CMS.EventLog.EventLogProvider.LogException(EVENT_LOG_SOURCE, "Upload", new Exception("Invalid file."));
+            throw new ApplicationException("Invalid file.");
+        }
+    }
+
+    /// <summary>
+    /// Import new data to a Custom Table
+    /// </summary>
+    /// <param name="customTableClassName">Code name of Custom Table to import data to</param>
+    /// <param name="dataToImport">Data to be imported</param>
+    /// <param name="cleanUpBeforeImport">Specifies whether existing data should be discarted (true - removes all existing records)</param>
+    private void ImportData(string customTableClassName, DataTable dataToImport, bool cleanUpBeforeImport = false)
+    {
+        CMS.EventLog.EventLogProvider.LogInformation(EVENT_LOG_SOURCE, "ImportData", "Starting data import to " + customTableClassName);
+
+        CustomTableItemProvider customTableProvider = new CustomTableItemProvider(CMSContext.CurrentUser);
+
+        //if (cleanUpBeforeImport)
+        //{
+        //    ClearTable(customTableClassName);
+        //}
+
+
+
+        DataClassInfo customTable = DataClassInfoProvider.GetDataClass(customTableClassName);
+
+        if (customTable != null)
+        {
+            List<KeyValuePair<string, Type>> columns = new List<KeyValuePair<string, Type>>();
+
+            string[] ignoreField = CUSTOM_TABLE_SYSTEM_FIELDS.Split(';');
+
+            foreach (DataColumn c in customTable.SchemaDataSet.Tables[0].Columns)
+            {
+                int isIgnored = ignoreField.Where(x => x.Trim().ToLower() == c.ColumnName.Trim().ToLower()).Count();
+
+                if (isIgnored == 0)
+                {
+                    columns.Add(new KeyValuePair<string, Type>(c.ColumnName, c.DataType));
+                }
+            }
+
+            foreach (DataRow row in dataToImport.Rows)
+            {
+                try
+                {
+                    bool IsInsert = row["INSERT"].ToString() == "1" ? true : false;
+                    bool IsUpdate = row["UPDATE"].ToString() == "1" ? true : false;
+                    bool IsDelete = row["DELETE"].ToString() == "1" ? true : false;
+
+                    CustomTableItem newCustomTableItem = null;
+
+                    if (IsDelete)
+                    {
+                        int itemID = (int)row["itemID"];
+                        newCustomTableItem = customTableProvider.GetItem(itemID, customTableClassName);
+                        newCustomTableItem.Delete();
+                        return;
+                    }
+                    else if (IsUpdate)
+                    {
+                        int itemID = (int)row["itemID"];
+                        newCustomTableItem = customTableProvider.GetItem(itemID, customTableClassName);
+                    }
+                    else
+                    {
+                        newCustomTableItem = new CustomTableItem(customTableClassName, customTableProvider);
+                    }
+
+                    foreach (KeyValuePair<string, Type> col in columns)
+                    {
+                        if (dataToImport.Columns.Contains(col.Key))
+                        {
+                            if (col.Value == typeof(DateTime))
+                            {
+                                newCustomTableItem.SetValue(col.Key, ParseDate(row[col.Key]));
+                            }
+                            if (col.Value == typeof(Boolean))
+                            {
+                                //newCustomTableItem.SetValue(col.Key, (bool)(row[col.Key]));
+                                if (row[col.Key].ToString() == "1")
+                                    newCustomTableItem.SetValue(col.Key, true);
+                                else
+                                    newCustomTableItem.SetValue(col.Key, false);
+                            }
+                            else
+                            {
+                                newCustomTableItem.SetValue(col.Key, row[col.Key]);
+                            }
+                        }
+                    }
+
+                    newCustomTableItem.Insert();
+                }
+                catch (Exception ex)
+                {
+                    CMS.EventLog.EventLogProvider.LogException(EVENT_LOG_SOURCE, "ImportDataRow", ex, "Failed to import new row to " + customTableClassName);
+                    throw new ApplicationException("Unable to create new row.", ex);
+                }
+            }
+
+        }
+        else
+        {
+            throw new ApplicationException(customTableClassName + " custom table does not exist.");
+        }
+
+        CMS.EventLog.EventLogProvider.LogInformation(EVENT_LOG_SOURCE, "ImportData", "Data import completed for " + customTableClassName);
+    }
+
+    //private void ImportData2(string customTableClassName, IExcelDataReader myReader)
+    //{
+    //    CMS.EventLog.EventLogProvider.LogInformation(EVENT_LOG_SOURCE, "ImportData", "Starting data import to " + customTableClassName);
+
+    //    CustomTableItemProvider customTableProvider = new CustomTableItemProvider(CMSContext.CurrentUser);
+
+    //    DataClassInfo customTable = DataClassInfoProvider.GetDataClass(customTableClassName);
+
+    //    if (customTable != null)
+    //    {
+    //        try
+    //        {
+    //            while (myReader.Read())
+    //            {
+    //                int _counter = 0;
+
+    //                bool IsInsert = GetBooleanData(myReader,ref _counter);
+    //                bool IsUpdate = GetBooleanData(myReader, ref _counter);
+    //                bool IsDelete = GetBooleanData(myReader, ref _counter);
+
+    //                CustomTableItem newCustomTableItem = null;
+
+    //                //if (IsDelete)
+    //                //{
+    //                //    int itemID = (int)row["itemID"];
+    //                //    newCustomTableItem = customTableProvider.GetItem(itemID, customTableClassName);
+    //                //    newCustomTableItem.Delete();
+    //                //    return;
+    //                //}
+    //                //else if (IsUpdate)
+    //                //{
+    //                //    int itemID = (int)row["itemID"];
+    //                //    newCustomTableItem = customTableProvider.GetItem(itemID, customTableClassName);
+    //                //}
+    //                //else
+    //                //{
+    //                //    newCustomTableItem = new CustomTableItem(customTableClassName, customTableProvider);
+    //                //}
+
+    //                newCustomTableItem.SetValue("", false);
+
+    //            }
+
+    //        }
+    //        catch (Exception ex)
+    //        {
+
+    //        }
+    //    }
+    //    else
+    //    {
+    //        throw new ApplicationException(customTableClassName + " custom table does not exist.");
+    //    }
+
+    //    CMS.EventLog.EventLogProvider.LogInformation(EVENT_LOG_SOURCE, "ImportData", "Data import completed for " + customTableClassName);
+    //}
+
+    //bool GetBooleanData(IExcelDataReader reader,ref int counter)
+    //{
+    //   bool temp = reader.GetBoolean(counter);
+    //    counter++;
+    //    return temp;
+    //}
+
+
+    /// <summary>
+    /// Removes all records of Custom Table
+    /// </summary>
+    /// <param name="customTableClassName">Code name of Custom Table to clear</param>
+    private void ClearTable(string customTableClassName)
+    {
+        CMS.EventLog.EventLogProvider.LogInformation(EVENT_LOG_SOURCE, "ClearTable", "Removing data from " + customTableClassName);
+        CustomTableItemProvider customTableProvider = new CustomTableItemProvider(CMSContext.CurrentUser);
+        customTableProvider.DeleteItems(customTableClassName);
+    }
+
+    /// <summary>
+    /// Test method.
+    /// Gets DataTable from xls
+    /// </summary>
+    private DataTable GetDataSetFromXls()
+    {
+        string str;
+
+        string mXlsURL = "/IntranetPortal/media/HR/Spectra-employees-3-4-14.xlsx";
+        string SheetName = "FinalList";
+
+        str = Server.MapPath(mXlsURL).ToString();
+
+        return ReadExceldata(str, SheetName);
+
+    }
+
+    /// <summary>
+    /// Reads specified datasheet of Excel file
+    /// </summary>
+    /// <param name="fileName">Excel file name with path</param>
+    /// <param name="sheetName">Datasheet name to read</param>
+    /// <returns>Data from the sheet converted to a DataTable</returns>
+    private DataTable ReadExceldata(string fileName, string sheetName)
+    {
+        CMS.EventLog.EventLogProvider.LogInformation(EVENT_LOG_SOURCE, "ReadData", "Reading data");
+        //  Return the value of the specified cell.
+        const string documentRelationshipType = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument";
+        const string worksheetSchema = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+        const string sharedStringsRelationshipType = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings";
+        const string sharedStringSchema = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+
+        string cellValue = null;
+        DataTable dt = new DataTable(sheetName);
+
+        //  Retrieve the stream containing the requested
+        //  worksheet's info:
+        try
+        {
+            using (Package xlPackage = Package.Open(fileName, FileMode.Open, FileAccess.Read))
+            {
+                PackagePart documentPart = null;
+                Uri documentUri = null;
+
+                //  Get the main document part (workbook.xml).
+                foreach (System.IO.Packaging.PackageRelationship relationship in xlPackage.GetRelationshipsByType(documentRelationshipType))
+                {
+                    //  There should only be one document part in the package. 
+                    documentUri = PackUriHelper.ResolvePartUri(new Uri("/", UriKind.Relative), relationship.TargetUri);
+                    documentPart = xlPackage.GetPart(documentUri);
+                    //  There should only be one instance, but get out no matter what.
+                    break;
+                }
+
+                if (documentPart != null)
+                {
+                    // Load the contents of the workbook.
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(documentPart.GetStream());
+
+                    //  Create a namespace manager, so you can search.
+                    //  Add a prefix (d) for the default namespace.
+                    NameTable nt = new NameTable();
+                    XmlNamespaceManager nsManager = new XmlNamespaceManager(nt);
+                    nsManager.AddNamespace("d", worksheetSchema);
+                    nsManager.AddNamespace("s", sharedStringSchema);
+
+                    string searchString = string.Format("//d:sheet[@name='{0}']", sheetName);
+                    XmlNode sheetNode = doc.SelectSingleNode(searchString, nsManager);
+                    if (sheetNode != null)
+                    {
+                        //  Get the relId attribute:
+                        XmlAttribute relationAttribute = sheetNode.Attributes["r:id"];
+                        if (relationAttribute != null)
+                        {
+                            string relId = relationAttribute.Value;
+
+                            //  First, get the relation between the document and the sheet.
+                            PackageRelationship sheetRelation = documentPart.GetRelationship(relId);
+                            Uri sheetUri = PackUriHelper.ResolvePartUri(documentUri, sheetRelation.TargetUri);
+                            PackagePart sheetPart = xlPackage.GetPart(sheetUri);
+
+                            //  Load the contents of the workbook.
+                            XmlDocument sheetDoc = new XmlDocument(nt);
+                            sheetDoc.Load(sheetPart.GetStream());
+
+                            XmlDocument sharedStringDoc = new XmlDocument(nt);
+                            foreach (System.IO.Packaging.PackageRelationship stringRelationship in documentPart.GetRelationshipsByType(sharedStringsRelationshipType))
+                            {
+                                //  There should only be one shared string reference, so you'll exit this loop immediately.
+                                Uri sharedStringsUri = PackUriHelper.ResolvePartUri(documentUri, stringRelationship.TargetUri);
+                                PackagePart stringPart = xlPackage.GetPart(sharedStringsUri);
+                                if (stringPart != null)
+                                {
+                                    //  Load the contents of the shared strings.
+
+                                    sharedStringDoc.Load(stringPart.GetStream());
+
+                                    //  Add the string schema to the namespace manager:
+                                    nsManager.AddNamespace("s", sharedStringSchema);
+
+                                    int requestedString = Convert.ToInt32(cellValue);
+                                    string strSearch = string.Format("//s:sst/s:si[{0}]", requestedString + 1);
+                                    XmlNodeList n = sharedStringDoc.SelectNodes("//s:sst/s:si", nsManager);
+                                }
+                            }
+                            XmlNodeList sharedNodes = sharedStringDoc.SelectNodes("//s:sst/s:si", nsManager);
+
+                            XmlNodeList nodeList = sheetDoc.SelectNodes(string.Format("//d:sheetData/d:row"), nsManager);
+                            List<string> attributes = new List<string>();
+                            foreach (XmlNode cellNodes in nodeList)
+                            {
+                                if (cellNodes.Attributes["r"].Value == "1")
+                                {
+                                    foreach (XmlNode col in cellNodes)
+                                    {
+                                        dt.Columns.Add(sharedNodes[Convert.ToInt32(col.InnerText)].InnerText.Trim());
+                                        attributes.Add(col.Attributes["r"].Value.Substring(0, 1));
+                                    }
+                                }
+                                else
+                                {
+                                    List<string> values = new List<string>(9);
+                                    for (int c = 0; c < attributes.Count; c++)
+                                    {
+                                        System.Collections.IEnumerator enumerator = cellNodes.ChildNodes.GetEnumerator();
+                                        while (enumerator.MoveNext())
+                                        {
+                                            XmlNode curNode = (XmlNode)enumerator.Current;
+                                            if (curNode.Attributes["r"].Value.Contains(attributes[c]))
+                                            {
+                                                values.Add((curNode.Attributes["t"] != null && curNode.Attributes["t"].Value.Contains("s")) ? sharedNodes[Convert.ToInt32(curNode.InnerText)].InnerText : curNode.InnerText);
+                                                break;
+                                            }
+                                        }
+                                        if (values.Count == c) values.Add(string.Empty);
+                                    }
+                                    dt.Rows.Add(values.ToArray());
+                                    values.Clear();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (FileNotFoundException ex)
+        {
+            lblMessage.Text = ex.Message;
+            CMS.EventLog.EventLogProvider.LogException(EVENT_LOG_SOURCE, "ReadData", ex);
+            throw ex;
+        }
+        catch (Exception ex)
+        {
+            lblMessage.Text = ex.Message;
+            CMS.EventLog.EventLogProvider.LogException(EVENT_LOG_SOURCE, "ReadData", ex);
+            throw new ApplicationException("Error reading file", ex);
+        }
+
+        return dt;
+    }
+
+    /// <summary>
+    /// Converts ticks to DateTime value
+    /// </summary>
+    /// <param name="ticks">Ticks</param>
+    /// <returns>DateTime value</returns>
+    private DateTime ParseDate(object date)
+    {
+
+        if (date is DateTime)
+        {
+            return (DateTime)date;
+        }
+
+        DateTime dt = new DateTime();
+        if (DateTime.TryParse(date.ToString(), out dt))
+        {
+            return dt;
+        }
+
+        double d;
+        if (double.TryParse(date.ToString(), out d))
+        {
+            DateTime conv = DateTime.FromOADate(d);
+            return conv;
+        }
+        return new DateTime();
+    }
+
+    #endregion
+}

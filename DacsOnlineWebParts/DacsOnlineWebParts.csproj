@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2058CF48-C180-41F8-93D0-331FA69F3F36}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DacsOnlineWebParts</RootNamespace>
+    <AssemblyName>DacsOnlineWebParts</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=4.1.50927.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.CKEditor, Version=6.0.4463.26635, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.CKEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.CMSHelper, Version=6.0.4297.34144, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.CMSHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.Controls, Version=6.0.4297.34150, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.DataEngine, Version=6.0.4297.34133, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.DataEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.ExtendedControls, Version=6.0.4297.34144, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.ExtendedControls.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.FormEngine, Version=6.0.4463.26629, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.FormEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.GlobalHelper, Version=6.0.4297.34132, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.GlobalHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.PortalControls, Version=6.0.4297.34152, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.PortalControls.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.PortalEngine, Version=6.0.4463.26630, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.PortalEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.SettingsProvider, Version=6.0.4297.34129, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.SettingsProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.SiteProvider, Version=6.0.4297.34138, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.SiteProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.Synchronization, Version=6.0.4463.26621, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.Synchronization.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.TreeEngine, Version=6.0.4297.34140, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.TreeEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.UIControls, Version=6.0.4297.34155, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.UIControls.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.WebAnalytics">
+      <HintPath>..\Reference Dependencies\CMS.WebAnalytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DacsOnlineControls\Calendar.ascx.cs">
+      <DependentUpon>Calendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DacsOnlineControls\Calendar.ascx.designer.cs">
+      <DependentUpon>Calendar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DacsOnlineControls\CLProduct.ascx.cs">
+      <DependentUpon>CLProduct.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DacsOnlineControls\CLProduct.ascx.designer.cs">
+      <DependentUpon>CLProduct.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DacsOnlineControls\CLReproductions.ascx.cs">
+      <DependentUpon>CLReproductions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DacsOnlineControls\CLReproductions.ascx.designer.cs">
+      <DependentUpon>CLReproductions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DacsOnlineControls\ConformationLightbox.ascx.cs">
+      <DependentUpon>ConformationLightbox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DacsOnlineControls\ConformationLightbox.ascx.designer.cs">
+      <DependentUpon>ConformationLightbox.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DacsOnlineControls\CountrySelector.ascx.cs">
+      <DependentUpon>CountrySelector.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DacsOnlineControls\CountrySelector.ascx.designer.cs">
+      <DependentUpon>CountrySelector.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DacsOnlineControls\MultiTextBox.ascx.cs">
+      <DependentUpon>MultiTextBox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DacsOnlineControls\MultiTextBox.ascx.designer.cs">
+      <DependentUpon>MultiTextBox.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DacsOnlineControls\PagingControl.ascx.cs">
+      <DependentUpon>PagingControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DacsOnlineControls\PagingControl.ascx.designer.cs">
+      <DependentUpon>PagingControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DacsOnlineControls\PhoneValidator.ascx.cs">
+      <DependentUpon>PhoneValidator.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DacsOnlineControls\PhoneValidator.ascx.designer.cs">
+      <DependentUpon>PhoneValidator.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DacsOnlineControls\SalesInformation.ascx.cs">
+      <DependentUpon>SalesInformation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DacsOnlineControls\SalesInformation.ascx.designer.cs">
+      <DependentUpon>SalesInformation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DacsOnlineControls\WebSiteValidator.ascx.cs">
+      <DependentUpon>WebSiteValidator.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DacsOnlineControls\WebSiteValidator.ascx.designer.cs">
+      <DependentUpon>WebSiteValidator.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebParts\ARRArtistSearch.ascx.cs">
+      <DependentUpon>ARRArtistSearch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\ARRArtistSearch.ascx.designer.cs">
+      <DependentUpon>ARRArtistSearch.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\ArrThresholdCalculator.ascx.cs">
+      <DependentUpon>ArrThresholdCalculator.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\ArrThresholdCalculator.ascx.designer.cs">
+      <DependentUpon>ArrThresholdCalculator.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\ArtistDetails.ascx.cs">
+      <DependentUpon>ArtistDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\ArtistDetails.ascx.designer.cs">
+      <DependentUpon>ArtistDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\ArtMarketSalesForm.ascx.cs">
+      <DependentUpon>ArtMarketSalesForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\ArtMarketSalesForm.ascx.designer.cs">
+      <DependentUpon>ArtMarketSalesForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\CLArtistSearch.ascx.cs">
+      <DependentUpon>CLArtistSearch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\CLArtistSearch.ascx.designer.cs">
+      <DependentUpon>CLArtistSearch.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\Confirmation.ascx.cs">
+      <DependentUpon>Confirmation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\Confirmation.ascx.designer.cs">
+      <DependentUpon>Confirmation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\AllArtistSearch.ascx.cs">
+      <DependentUpon>AllArtistSearch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\AllArtistSearch.ascx.designer.cs">
+      <DependentUpon>AllArtistSearch.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\HomeCLArtistSearch.ascx.cs">
+      <DependentUpon>HomeCLArtistSearch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\HomeCLArtistSearch.ascx.designer.cs">
+      <DependentUpon>HomeCLArtistSearch.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\HomeARRArtistSearch.ascx.cs">
+      <DependentUpon>HomeARRArtistSearch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\HomeARRArtistSearch.ascx.designer.cs">
+      <DependentUpon>HomeARRArtistSearch.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\CopyRightLicencingForm.ascx.cs">
+      <DependentUpon>CopyRightLicencingForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\CopyRightLicencingForm.ascx.designer.cs">
+      <DependentUpon>CopyRightLicencingForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\DocumentListCatagories.ascx.cs">
+      <DependentUpon>DocumentListCatagories.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\DocumentListCatagories.ascx.designer.cs">
+      <DependentUpon>DocumentListCatagories.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\JavascriptWebPart.ascx.cs">
+      <DependentUpon>JavascriptWebPart.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\JavascriptWebPart.ascx.designer.cs">
+      <DependentUpon>JavascriptWebPart.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\JobApplicationPack.ascx.cs">
+      <DependentUpon>JobApplicationPack.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\JobApplicationPack.ascx.designer.cs">
+      <DependentUpon>JobApplicationPack.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\ApplicationFormRequest.ascx.cs">
+      <DependentUpon>ApplicationFormRequest.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\ApplicationFormRequest.ascx.designer.cs">
+      <DependentUpon>ApplicationFormRequest.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\RoyaltyCalculator.ascx.cs">
+      <DependentUpon>RoyaltyCalculator.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\RoyaltyCalculator.ascx.designer.cs">
+      <DependentUpon>RoyaltyCalculator.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\NewsLetterSignUp.ascx.cs">
+      <DependentUpon>NewsLetterSignUp.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\NewsLetterSignUp.ascx.designer.cs">
+      <DependentUpon>NewsLetterSignUp.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebParts\TitleLatestNews.ascx.cs">
+      <DependentUpon>TitleLatestNews.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebParts\TitleLatestNews.ascx.designer.cs">
+      <DependentUpon>TitleLatestNews.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CognitMVP.Model\DacsOnline.Model.csproj">
+      <Project>{B0A773CA-C794-4D63-A4ED-7D032BF5224B}</Project>
+      <Name>DacsOnline.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CognitMVP.Presentation\DacsOnline.Presentation.csproj">
+      <Project>{E4466E8F-5AF5-4AD7-B94B-1C5DE69C5151}</Project>
+      <Name>DacsOnline.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebFormsMvp.Unity\WebFormsMvp.Unity.csproj">
+      <Project>{EB5A9AA1-38A5-48CA-81B0-A1523D1A74A1}</Project>
+      <Name>WebFormsMvp.Unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebFormsMvp\WebFormsMvp.csproj">
+      <Project>{40A16268-BAB3-40E6-AD7C-371DF4124ED0}</Project>
+      <Name>WebFormsMvp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DacsOnlineControls\Calendar.ascx" />
+    <Content Include="DacsOnlineControls\CLProduct.ascx" />
+    <Content Include="DacsOnlineControls\CLReproductions.ascx" />
+    <Content Include="DacsOnlineControls\ConformationLightbox.ascx" />
+    <Content Include="DacsOnlineControls\CountrySelector.ascx" />
+    <Content Include="DacsOnlineControls\MultiTextBox.ascx" />
+    <Content Include="DacsOnlineControls\PagingControl.ascx" />
+    <Content Include="DacsOnlineControls\PhoneValidator.ascx" />
+    <Content Include="DacsOnlineControls\SalesInformation.ascx" />
+    <Content Include="DacsOnlineControls\WebSiteValidator.ascx" />
+    <Content Include="WebParts\ARRArtistSearch.ascx" />
+    <Content Include="WebParts\ArrThresholdCalculator.ascx" />
+    <Content Include="WebParts\ArtistDetails.ascx" />
+    <Content Include="WebParts\ArtMarketSalesForm.ascx" />
+    <Content Include="WebParts\CLArtistSearch.ascx" />
+    <Content Include="WebParts\Confirmation.ascx" />
+    <Content Include="WebParts\AllArtistSearch.ascx" />
+    <Content Include="WebParts\HomeCLArtistSearch.ascx" />
+    <Content Include="WebParts\HomeARRArtistSearch.ascx" />
+    <Content Include="WebParts\CopyRightLicencingForm.ascx" />
+    <Content Include="WebParts\DocumentListCatagories.ascx" />
+    <Content Include="WebParts\JavascriptWebPart.ascx" />
+    <Content Include="WebParts\JobApplicationPack.ascx" />
+    <Content Include="WebParts\ApplicationFormRequest.ascx" />
+    <Content Include="WebParts\RoyaltyCalculator.ascx" />
+    <Content Include="WebParts\NewsLetterSignUp.ascx" />
+    <Content Include="WebParts\TitleLatestNews.ascx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49794</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>copy "$(ProjectDir)\WebParts\*.ascx" "$(SolutionDir)\CMSWebParts\DACSWebParts\"
+copy "$(ProjectDir)\DacsOnlineControls\*.ascx" "$(SolutionDir)\CMSWebParts\DacsOnlineControls\"</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

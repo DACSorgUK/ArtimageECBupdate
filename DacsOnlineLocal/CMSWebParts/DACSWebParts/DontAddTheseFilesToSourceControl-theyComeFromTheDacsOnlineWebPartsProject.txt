@@ -1,0 +1,3 @@
+The .ascx controls are copied from the DacsOnlineWebparts project!
+
+lance@lancetek.com - 20160108

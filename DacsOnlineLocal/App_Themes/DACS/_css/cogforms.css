@@ -1,0 +1,165 @@
+/* ============================================================
+    Custom Forms
+============================================================ */
+.DropDownField
+{
+    width: auto !important;
+    /* height: auto !important; */
+}
+.MultitextBox input[type="submit"], .MultitextBox input[type="button"]
+{
+    border-bottom: 1px solid #B4B6B8;
+    color: rgb(88, 89, 91);
+    font: bold 1em/90% sans-serif;
+    -moz-transition: all 0.3s ease 0s;
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-style: normal;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+    vertical-align: baseline; /*background: -moz-linear-gradient(center bottom, #E4E6E7 0%, #F4F6F8 90%, #FFFFFF 100%) repeat scroll 0 0 transparent; 	box-shadow: none; 	color: rgb(88, 89, 91); 	cursor: pointer; 	margin: 0.5714em 0.5714em 0.5714em 0; 	padding: 0.5em 0.8571em; 	text-shadow: 0 1px 0 #FFFFFF; 	width: auto;*/
+}
+
+
+input.date input.txtDate
+{
+    background: #fff url('assets/sprite.png') no-repeat right -258px;
+    width: 17em;
+}
+fieldset fieldset td, fieldset fieldset th
+{
+    border: none;
+}
+.linkAddItem
+{
+    -moz-transition: all 0.3s ease 0s;
+    border-bottom: 1px solid #B4B6B8;
+    color: rgb(88, 89, 91);
+    font: bold 1em/90% sans-serif;
+}
+.global-search .combined input[type="text"]
+{
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    margin: 0;
+}
+input.date input.txtDate
+{
+    background: #fff url('assets/sprite.png') no-repeat right -258px;
+    width: 17em;
+}
+div.text input
+{
+    color: #444;
+    font: normal 1em/1.1429 sans-serif; /* 14px/16px */
+    background-color: #FFF;
+    outline: 1px solid #A4A7A9;
+    border: 0 none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.1);
+    margin: 0.0714em 0.5714em 0.3571em 0;
+    padding: 0.5em 0.5714em; /* 7px 8px */
+    vertical-align: middle;
+    width: 90%;
+    display: block;
+}
+div.text input :focus
+{
+    outline: 1px solid rgb(88, 89, 91);
+    outline-offset: 0px;
+}
+
+ul.navigation li input
+{
+    background: #fff;
+    box-shadow: none;
+    color: rgb(88, 89, 91);
+    cursor: pointer;
+    font-weight: bold;
+    margin: 0 0.5714em;
+    padding: 0.5em 0.8571em;
+    text-shadow: 0 1px 0 #FFFFFF;
+    width: auto;
+    display: block;
+    outline: none;
+}
+ul.navigation li input.selected
+{
+    background-color: #e6e7e8;
+    border: 0 none;
+    display: block;
+    font-weight: bold;
+    line-height: 1.1429;
+    padding: 0.5714em 0.7857em 0.5714em 0.8571em;
+    text-align: center;
+}
+textarea.special
+{
+    font-family: arial;
+    font-size: 14px;
+}
+textarea.special:first-line
+{
+    font-weight: bold;
+}
+
+.red
+{
+    color: #990000;
+}
+
+.artistDetails
+{
+    border-bottom: 1px solid #BC9FC3; /* border-top: 4px solid rgb(88, 89, 91);*/
+    color: rgb(88, 89, 91);
+    font: 500 2.5714em/0.8889 'Helvetica Neue' , 'Arial' ,sans-serif;
+    letter-spacing: -0.03125em;
+    margin: 0;
+    padding: 0.1111em 0 1.0833em;
+}
+
+.date_dd_mm_yyyy
+    {
+      background: url("assets/sprite.png") no-repeat scroll right -258px #FFFFFF;
+    width: 17em;
+    }
+    
+    ul.navigation li a.selected {
+    background-color: #e6e7e8;
+}
+
+input.TextBoxField:focus
+{
+    outline: 1px solid rgb(88, 89, 91);
+    outline-offset: 0px;
+}
+
+
+fieldset table input[type] {margin-right:3px;}
+
+.EditMode .artist img {width:300px!important;} 
+.EditMode .artist {margin-top: 0!important;} 
+.EditMode .service-proposition {bottom:0!important;}
+
+
+ul.stories .mainStory img, ul.people .mainStory img {
+            width: 100%;
+}
+
+ul.stories .colgroup ul li, 
+ul.people .colgroup ul li {
+    border-top:none;
+    list-style-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJUlEQVQYV2NkIBIwEqmOgTEiMvo/NsUrli9FMWR4KSQ6eIhVCADZthgL3x2IvAAAAABJRU5ErkJggg==');
+    margin: 0 0 0 2.2857em;
+	line-height: 1.4286;
+	overflow: visible;
+}
+
+

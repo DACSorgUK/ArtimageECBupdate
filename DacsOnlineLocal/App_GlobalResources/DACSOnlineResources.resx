@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ArtistSearchExactMatch" xml:space="preserve">
+    <value>Exact match results found</value>
+  </data>
+  <data name="ArtistSearchNoExactMatch" xml:space="preserve">
+    <value>Partial match results found</value>
+  </data>
+  <data name="CLArtistDetailsMessage_DACS" xml:space="preserve">
+    <value>We represent this artist for Copyright Licensing. Please &lt;a  href="*url*"&gt;fill in our online form&lt;/a&gt; to request permission to reproduce their work.</value>
+  </data>
+  <data name="CLArtistDetailsMessage_NOT_DACS" xml:space="preserve">
+    <value>Sorry, we do not hold information on who represents this artist for Copyright Licensing.</value>
+  </data>
+  <data name="DefaultCategory" xml:space="preserve">
+    <value>Latest News</value>
+  </data>
+  <data name="EligibilityMessage_1" xml:space="preserve">
+    <value>&lt;dt class="icon-tick first-child"&gt;ARR payments are necessary&lt;/dt&gt;</value>
+  </data>
+  <data name="EligibilityMessage_2" xml:space="preserve">
+    <value>&lt;dt class="icon-cross first-child last-child"&gt;ARR payments are not necessary for this artist due to their nationality&lt;/dt&gt;</value>
+  </data>
+  <data name="EligibilityMessage_3" xml:space="preserve">
+    <value>&lt;dt class="icon-cross first-child"&gt;ARR payments may not be necessary&lt;/dt&gt;</value>
+  </data>
+  <data name="EligibilityMessage_4" xml:space="preserve">
+    <value>&lt;dt class="icon-tick first-child last-child"&gt;ARR payments may be necessary &lt;/dt&gt;</value>
+  </data>
+  <data name="EligibilityMessage_5" xml:space="preserve">
+    <value>&lt;dt class="icon-cross first-child last-child"&gt;ARR payments may not be necessary  &lt;/dt&gt;</value>
+  </data>
+  <data name="EligibilityMessage_6" xml:space="preserve">
+    <value>&lt;dt class="icon-cross first-child last-child"&gt;ARR payments are not necessary for this artist as they are out of copyright &lt;/dt&gt;</value>
+  </data>
+  <data name="ImageHireDetail1DetailPage" xml:space="preserve">
+    <value>Browse and request image high quality, approved images through our Artimage website.</value>
+  </data>
+  <data name="ImageHireHeaderDetailPage" xml:space="preserve">
+    <value>&lt;dt class="icon-tick first-child last-child"&gt;Images are available on Artimage&lt;/dt&gt;</value>
+  </data>
+  <data name="ImageHireMessage_1" xml:space="preserve">
+    <value>&lt;dt class="icon-tick first-child"&gt;Images by this artist are available from Artimage&lt;/dt&gt;</value>
+  </data>
+  <data name="ImageHireMessage_Pre" xml:space="preserve">
+    <value>Images by this artist are available from DACS. Please contact &lt;a href="mailto:licensing@dacs.org.uk?subject=[DACS - Licensing Enquiry]"&gt;licensing@dacs.org.uk&lt;/a&gt; for more information.</value>
+  </data>
+  <data name="MandateMessage_1" xml:space="preserve">
+    <value>Verified by DACS as eligible for ARR Royalties</value>
+  </data>
+  <data name="MandateMessage_2" xml:space="preserve">
+    <value>DACS has not confirmed this artists nationality.</value>
+  </data>
+  <data name="MandateMessage_22" xml:space="preserve">
+    <value>DACS has not confirmed this artists nationality but will do so on request.</value>
+  </data>
+  <data name="MandateMessage_3" xml:space="preserve">
+    <value>DACS does not hold copyright or nationality status information for this artist.</value>
+  </data>
+  <data name="MoreInfoMessage_1" xml:space="preserve">
+    <value>Full consultation means that all license requests need to be reviewed and signed-off by the artist or their estate. This can be time consuming.</value>
+  </data>
+  <data name="MoreInfoMessage_2" xml:space="preserve">
+    <value>You may need to supply imagery depicting their work in context (e.g. a PDF).</value>
+  </data>
+  <data name="MoreInfoMessage_3" xml:space="preserve">
+    <value>"There may be restrictions on certain uses of this artist's work. Please get in touch, and we'll be happy to advise you."</value>
+  </data>
+  <data name="MoreInfoMessage_4" xml:space="preserve">
+    <value>Sorry, we do not hold information on who represents this artist for Copyright Licensing.</value>
+  </data>
+  <data name="MoreInfoMessage_5" xml:space="preserve">
+    <value>Sorry, we do not hold information on which organisation represents this artist. DACS does not hold information about the copyright status of this artist. If you would like to help us update our database, please get in touch.</value>
+  </data>
+  <data name="MoreInfoMessage_6" xml:space="preserve">
+    <value>As their date of death is over seventy years ago, this artist is likely out of copyright. Photographs of this artists work may still be in copyright: please check with your image supplier.</value>
+  </data>
+  <data name="PaymentMessage_1" xml:space="preserve">
+    <value>This artist has mandated DACS to represent them for ARR.</value>
+  </data>
+  <data name="PaymentMessage_2" xml:space="preserve">
+    <value>DACS is acting as the collecting agency through a Sister Society</value>
+  </data>
+  <data name="PaymentMessage_3" xml:space="preserve">
+    <value>Represented for ARR by</value>
+  </data>
+  <data name="PaymentMessage_4" xml:space="preserve">
+    <value>DACS pays royalties to this artist</value>
+  </data>
+  <data name="PaymentMessage_5" xml:space="preserve">
+    <value>DACS is acting as the collecting agency through a Sister Society. Please contact us for more information on the nationality status of this artist.</value>
+  </data>
+  <data name="RepresentationMessage_1" xml:space="preserve">
+    <value>&lt;dt class="icon-tick first-child"&gt;DACS represents this artist for Copyright Licensing&lt;/dt&gt;</value>
+  </data>
+  <data name="RepresentationMessage_2" xml:space="preserve">
+    <value>&lt;dt class="icon-cross first-child last-child"&gt;  DACS does not represent this artist for Copyright Licensing&lt;/dt&gt;</value>
+  </data>
+  <data name="ServiceDurationMessage_1" xml:space="preserve">
+    <value>Your licence request will take roughly 1-2 weeks</value>
+  </data>
+  <data name="ServiceDurationMessage_2" xml:space="preserve">
+    <value>Full consultation is required for this artist:  your license request may take more than 2 weeks</value>
+  </data>
+  <data name="WarnningMessage_1" xml:space="preserve">
+    <value>Warning: these search results are not exhaustive. You still need to pay ARR if the artist is a national from the European Economic Area, and if deceased, they have a date of death within 70 years of the sale date. View a list of eligible countries.</value>
+  </data>
+</root>

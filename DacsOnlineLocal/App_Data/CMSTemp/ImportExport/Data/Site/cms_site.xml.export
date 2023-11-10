@@ -1,0 +1,46 @@
+﻿<cms_site version="6.0">
+  <NewDataSet>
+    <cms_site>
+      <SiteID>1</SiteID>
+      <SiteName>DACSO</SiteName>
+      <SiteDisplayName>DACS Online</SiteDisplayName>
+      <SiteDescription>DACS Online website</SiteDescription>
+      <SiteStatus>RUNNING</SiteStatus>
+      <SiteDomainName>test.dacs.org.uk</SiteDomainName>
+      <SiteDefaultVisitorCulture>en-GB</SiteDefaultVisitorCulture>
+      <SiteDefaultEditorStylesheet>4</SiteDefaultEditorStylesheet>
+      <SiteGUID>0ed0d025-0ae4-494b-b476-0bf8fada769d</SiteGUID>
+      <SiteLastModified>2015-11-28T09:25:58.46+00:00</SiteLastModified>
+    </cms_site>
+    <cms_sitedomainalias>
+      <SiteDomainAliasID>1</SiteDomainAliasID>
+      <SiteDomainAliasName>46.38.191.124</SiteDomainAliasName>
+      <SiteID>1</SiteID>
+      <SiteDefaultVisitorCulture></SiteDefaultVisitorCulture>
+      <SiteDomainGUID>38d47e89-3b2c-4939-8964-d55c8dac8da0</SiteDomainGUID>
+      <SiteDomainLastModified>2012-07-31T11:25:01.787+01:00</SiteDomainLastModified>
+      <SiteDomainDefaultAliasPath></SiteDomainDefaultAliasPath>
+      <SiteDomainRedirectUrl></SiteDomainRedirectUrl>
+    </cms_sitedomainalias>
+    <cms_sitedomainalias>
+      <SiteDomainAliasID>2</SiteDomainAliasID>
+      <SiteDomainAliasName>dacs.org.uk</SiteDomainAliasName>
+      <SiteID>1</SiteID>
+      <SiteDefaultVisitorCulture></SiteDefaultVisitorCulture>
+      <SiteDomainGUID>419042e1-9dac-45b3-9c82-582d99c49215</SiteDomainGUID>
+      <SiteDomainLastModified>2012-07-31T11:25:25.767+01:00</SiteDomainLastModified>
+      <SiteDomainDefaultAliasPath></SiteDomainDefaultAliasPath>
+      <SiteDomainRedirectUrl></SiteDomainRedirectUrl>
+    </cms_sitedomainalias>
+    <cms_sitedomainalias>
+      <SiteDomainAliasID>3</SiteDomainAliasID>
+      <SiteDomainAliasName>localhost</SiteDomainAliasName>
+      <SiteID>1</SiteID>
+      <SiteDefaultVisitorCulture></SiteDefaultVisitorCulture>
+      <SiteDomainGUID>1842c8e5-014e-41fb-b2fe-6fea5e4a9e55</SiteDomainGUID>
+      <SiteDomainLastModified>2015-11-28T09:25:58.423+00:00</SiteDomainLastModified>
+      <SiteDomainDefaultAliasPath></SiteDomainDefaultAliasPath>
+      <SiteDomainRedirectUrl></SiteDomainRedirectUrl>
+    </cms_sitedomainalias>
+  </NewDataSet>
+</cms_site>

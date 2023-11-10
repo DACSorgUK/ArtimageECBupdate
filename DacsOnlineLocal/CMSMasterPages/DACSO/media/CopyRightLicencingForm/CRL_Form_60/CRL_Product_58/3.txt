@@ -1,0 +1,1 @@
+<add key="ConnectionString" value="Persist Security Info=False;User Id=alcs_onlineuser2;Password=p4ssw0rd;database=ALCS_Online_Prod_SAP;server=192.168.0.57,3801"/>

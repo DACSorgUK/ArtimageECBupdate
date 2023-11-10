@@ -1,0 +1,825 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using CMS.CMSHelper;
+using CMS.GlobalHelper;
+using CMS.PortalControls;
+using CMS.SettingsProvider;
+using CMS.SiteProvider;
+using System.Data;
+using System.IO;
+using System.IO.Packaging;
+using CMS.LicenseProvider;
+
+using CMS.TreeEngine;
+
+using CMS.UIControls;
+using CMS.WorkflowEngine;
+using CMS.EventLog;
+using System.Xml;
+using Excel;
+using System.Configuration;
+using CMS.FormEngine;
+using System.Windows.Forms;
+
+public partial class DACS_ImportArtistPage : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    //  const string CUSTOM_TABLE_SYSTEM_FIELDS = "DELETE;UPDATE;INSERT;ItemID;ItemGUID;ItemCreatedBy;ItemCreatedWhen;ItemModifiedBy;ItemModifiedWhen;";
+    const string EVENT_LOG_SOURCE = "ARTIST_IMPORT";
+
+    #region Public Properties
+
+    public string FileStoragePath
+    {
+        get
+        {
+            //string path = "";// ValidationHelper.GetString(GetValue("FileStoragePath"), "/" + CMSContext.CurrentSiteName + "/media/");
+            //                 //return string.IsNullOrEmpty(path) ? "/" + CMSContext.CurrentSiteName + "/ImportArtist/" : path;
+            //return string.IsNullOrEmpty(path) ? "/DACSO/ImportArtist/" : path;
+
+            return ConfigurationManager.AppSettings["ArtistImportPath"].ToString();
+        }
+
+    }
+
+    #endregion
+
+    #region Page Events and Methods
+
+    protected void btnImport_Click(object sender, EventArgs e)
+    {
+        bool _isError = false;
+
+        string message = ExecuteImport(ref _isError);
+
+        if (!_isError)
+        {
+            lblMessage.Text = message;
+            lblErrorMessage.Text = "";
+        }
+        else
+        {
+            lblErrorMessage.Text = message;
+            lblMessage.Text = "";
+        }
+    }
+
+    #endregion
+
+    #region Private Methods: business logic
+    private string ExecuteImport(ref bool isError)
+    {
+        string message = string.Empty;
+        if (!ValidateInput(out message))
+        {
+            isError = true;
+            return message;
+        }
+
+        try
+        {
+            string path = UploadExcelFile();
+
+            if (string.IsNullOrEmpty(path))
+            {
+                isError = true;
+                return "Error: Unable to read file. ";
+            }
+
+            string successMessage = "Import completed successfully.";
+
+            using (FileStream stream = File.Open(path, FileMode.Open, FileAccess.Read))
+            {
+                IExcelDataReader myReader = null;
+                string errorMessage = "";
+
+                if (Path.GetExtension(path) == ".xls")
+                {
+                    myReader = ExcelReaderFactory.CreateBinaryReader(stream);
+                }
+                else
+                {
+                    myReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                }
+
+                myReader.IsFirstRowAsColumnNames = true;
+                DataSet dsData = myReader.AsDataSet();
+                DataTable workSheet = null;
+
+                string xlSheetName = txtDatasheetName.Text.Trim();
+                if (dsData.Tables.Contains(xlSheetName))
+                {
+                    workSheet = dsData.Tables[xlSheetName];
+                    ImportData(tableSelect.Value.ToString(), workSheet, ref errorMessage);
+                }
+                else
+                {
+                    isError = true;
+                    successMessage = "Excel sheet name does not exist.";
+                }
+                //myReader.IsFirstRowAsColumnNames = true;
+                //myReader.Read();
+
+
+
+                if (errorMessage.Trim() != "")
+                {
+                    lnkDownliadErrorFile.Visible = true;
+                    CreateErrorPage(path, errorMessage);
+                    lnkDownliadErrorFile.NavigateUrl = FileStoragePath + Path.GetFileName(path) + ".txt";
+                    successMessage += " Some imported rows have failed, please use the 'Click to Download error file' link below to see the error log.";
+                    isError = true;
+                }
+                else
+                {
+                    lnkDownliadErrorFile.Visible = false;
+                }
+
+            }
+
+
+
+            return successMessage;
+        }
+        catch (Exception ex)
+        {
+            CMS.EventLog.EventLogProvider.LogException(EVENT_LOG_SOURCE, "ExecuteImport", ex);
+            return "Error: " + ex.Message;
+        }
+
+    }
+    private bool ValidateInput(out string error)
+    {
+        error = "";
+        if (!fileUpload.HasFile)
+        {
+            error = "Please select a file.";
+            return false;
+        }
+        if (!fileUpload.FileName.Contains(".xls"))
+        {
+            error = "Please select Excel file.";
+            return false;
+        }
+        if (string.IsNullOrEmpty(txtDatasheetName.Text.Trim()))
+        {
+            error = "Please specify Sheet name.";
+            return false;
+        }
+        return true;
+    }
+    private string UploadExcelFile()
+    {
+        if (fileUpload.HasFile && (Path.GetExtension(fileUpload.FileName) == ".xls" || Path.GetExtension(fileUpload.FileName) == ".xlsx"))
+        {
+            try
+            {
+                string pathAndName = string.Empty;
+                if (FileStoragePath.EndsWith("/"))
+                {
+                    pathAndName = Server.MapPath(FileStoragePath + fileUpload.FileName);
+                }
+                else
+                {
+                    pathAndName = Server.MapPath(string.Format("{0}/{1}", FileStoragePath, fileUpload.FileName));
+                }
+                fileUpload.SaveAs(pathAndName);
+                CMS.EventLog.EventLogProvider.LogInformation(EVENT_LOG_SOURCE, "Upload", "File uploaded");
+                return pathAndName;
+            }
+            catch (Exception ex)
+            {
+                CMS.EventLog.EventLogProvider.LogException(EVENT_LOG_SOURCE, "Upload", ex);
+                throw new ApplicationException("Failed to upload file.", ex);
+            }
+        }
+        else
+        {
+            lblMessage.Text = "Please select Excel file. ";
+            CMS.EventLog.EventLogProvider.LogException(EVENT_LOG_SOURCE, "Upload", new Exception("Invalid file."));
+            throw new ApplicationException("Invalid file.");
+        }
+    }
+    private void ImportData(string customTableClassName, DataTable dtData, ref string errorMessage)
+    {
+        //*********************** BULK INSER *******
+        //    BulkInsertSettings settings = new BulkInsertSettings
+        //    {
+        //        Mappings = new Dictionary<string, string>
+        //{
+        //    {"name", "PlanetName"},
+        //    {"star_name", "StarName"},
+        //    {"discovered", "YearDiscovered"}
+        //}
+        //    };
+        //// Use the BulkInsert API to insert all of the items at once.
+        // ConnectionHelper.BulkInsert(dsImport.Tables[0], "custom_exoplanets", settings);
+        //************************
+
+        CMS.EventLog.EventLogProvider.LogInformation(EVENT_LOG_SOURCE, "ImportData", "Starting data import to " + customTableClassName);
+
+        CustomTableItemProvider customTableProvider = new CustomTableItemProvider(CMSContext.CurrentUser);
+
+        DataClassInfo customTable = DataClassInfoProvider.GetDataClass(customTableClassName);
+
+        if (customTable != null)
+        {
+
+            int _counter = 1;
+            foreach (DataRow row in dtData.Rows)
+            {
+                string _messageTemp = "";
+                _counter++;
+                try
+                {
+                    CustomTableItem newCustomTableItem = null;
+                    newCustomTableItem = new CustomTableItem(customTableClassName, customTableProvider);
+
+                    bool IsInsert = false;
+                    bool IsUpdate = false;
+                    bool IsDelete = false;
+                    bool skipCondition = false;
+                    int itemID = 0;
+
+                    object _DELETE = row["DELETE"];
+                    if (_DELETE != DBNull.Value && (!string.IsNullOrEmpty(row["DELETE"].ToString().Trim())))
+                    {
+                        skipCondition = true;
+
+                        bool temp = false;
+                        if (ValidateBoolValue("DELETE", _DELETE, _counter, ref _messageTemp, ref temp))
+                            IsDelete = temp;
+                    }
+
+                    if (!skipCondition)
+                    {
+                        object _UPDATE = row["UPDATE"];
+
+                        if (_UPDATE != DBNull.Value && (!string.IsNullOrEmpty(row["UPDATE"].ToString().Trim())))
+                        {
+                            skipCondition = true;
+
+                            bool temp = false;
+                            if (ValidateBoolValue("UPDATE", _UPDATE, _counter, ref _messageTemp, ref temp))
+                                IsUpdate = temp;
+                        }
+                    }
+
+                    if (!skipCondition)
+                    {
+                        object _INSERT = row["INSERT"];
+                        if (_INSERT != DBNull.Value && (!string.IsNullOrEmpty(row["INSERT"].ToString().Trim())))
+                        {
+                            bool temp = false;
+                            if (ValidateBoolValue("INSERT", _INSERT, _counter, ref _messageTemp, ref temp))
+                                IsInsert = temp;
+                        }
+                    }
+
+                    if (IsDelete)
+                    {
+                        try
+                        {
+                            itemID = Convert.ToInt32(row["ItemID"]);
+                            newCustomTableItem = customTableProvider.GetItem(itemID, customTableClassName);
+
+                            if (newCustomTableItem == null)
+                            {
+                                _messageTemp += "ROW:" + _counter + " | ItemID :" + row["ItemID"] + " does not exist." + Environment.NewLine;
+                                errorMessage += _messageTemp;
+                            }
+                            else
+                                newCustomTableItem.Delete();
+                            continue;
+                        }
+                        catch
+                        {
+                            _messageTemp += "ROW:" + _counter + " |The field \"ItemID\" has invalid data \"" + row["ItemID"].ToString() + "\". Please check and try again." + Environment.NewLine;
+                        }
+                    }
+                    else if (IsUpdate)
+                    {
+                        try
+                        {
+                            itemID = Convert.ToInt32(row["ItemID"]);
+                            newCustomTableItem = customTableProvider.GetItem(itemID, customTableClassName);
+
+                            if (newCustomTableItem == null)
+                            {
+                                _messageTemp += "ROW:" + _counter + " | ItemID :" + row["ItemID"] + " does not exist." + Environment.NewLine;
+                                errorMessage += _messageTemp;
+                                continue;
+                            }
+                        }
+                        catch
+                        {
+                            _messageTemp += "ROW:" + _counter + " |The field \"ItemID\" has invalid data \"" + row["ItemID"].ToString() + "\". Please check and try again." + Environment.NewLine;
+                        }
+                    }
+                    else if (IsInsert)
+                    {
+                        newCustomTableItem = new CustomTableItem(customTableClassName, customTableProvider);
+                    }
+                    else
+                    {
+                        errorMessage += _messageTemp;
+                        continue;
+                    }
+
+                    if (CommonValidation("ID_ARR", row))
+                    {
+                        AddData(newCustomTableItem, row, "ID_ARR");
+                    }
+
+                    if (CommonValidation("ID_CL", row))
+                    {
+                        AddData(newCustomTableItem, row, "ID_CL");
+                    }
+
+                    if (CommonValidation("DataSource", row))
+                    {
+                        AddData(newCustomTableItem, row, "DataSource");
+                    }
+
+                    if (CommonValidation("IPIBaseNumber", row))
+                    {
+                        AddData(newCustomTableItem, row, "IPIBaseNumber");
+                    }
+
+                    if (CommonValidation("FirstNames", row))
+                    {
+                        AddData(newCustomTableItem, row, "FirstNames");
+                    }
+
+                    if (CommonValidation("LastName", row))
+                    {
+                        AddData(newCustomTableItem, row, "LastName");
+                    }
+
+                    if (CommonValidation("TripleRID", row))
+                    {
+                        AddData(newCustomTableItem, row, "TripleRID");
+                    }
+
+                    object _MigratedToTripleR = row["MigratedToTripleR"];
+                    if (CommonValidation("MigratedToTripleR", row))
+                    {
+                        bool temp = false;
+                        if (ValidateBoolValue("MigratedToTripleR", _MigratedToTripleR, _counter, ref _messageTemp, ref temp))
+                            AddData(newCustomTableItem, row, "MigratedToTripleR", temp);
+                    }
+
+                    if (CommonValidation("AuthenticFirstNames", row))
+                    {
+                        AddData(newCustomTableItem, row, "AuthenticFirstNames");
+                    }
+
+                    if (CommonValidation("AuthenticLastName", row))
+                    {
+                        AddData(newCustomTableItem, row, "AuthenticLastName");
+                    }
+
+                    if (CommonValidation("Pseudonym_1", row))
+                    {
+                        AddData(newCustomTableItem, row, "Pseudonym_1");
+                    }
+
+                    if (CommonValidation("Pseudonym_2", row))
+                    {
+                        AddData(newCustomTableItem, row, "Pseudonym_2");
+                    }
+
+                    if (CommonValidation("Pseudonym_3", row))
+                    {
+                        AddData(newCustomTableItem, row, "Pseudonym_3");
+                    }
+
+                    if (CommonValidation("Pseudonym_4", row))
+                    {
+                        AddData(newCustomTableItem, row, "Pseudonym_4");
+                    }
+
+                    if (CommonValidation("Pseudonym_5", row))
+                    {
+                        AddData(newCustomTableItem, row, "Pseudonym_5");
+                    }
+
+                    if (CommonValidation("Pseudonym_6", row))
+                    {
+                        AddData(newCustomTableItem, row, "Pseudonym_6");
+                    }
+
+                    if (CommonValidation("Nationality1", row))
+                    {
+                        string value = row["Nationality1"].ToString().Trim();
+                        if (ValidateNationality("Nationality1", value, _counter, ref _messageTemp))
+                            AddData(newCustomTableItem, row, "Nationality1", value);
+                    }
+
+                    if (CommonValidation("Nationality2", row))
+                    {
+                        string value = row["Nationality2"].ToString().Trim();
+                        if (ValidateNationality("Nationality2", value, _counter, ref _messageTemp))
+                            AddData(newCustomTableItem, row, "Nationality2", value);
+                    }
+
+                    if (CommonValidation("Nationality3", row))
+                    {
+                        string value = row["Nationality3"].ToString().Trim();
+                        if (ValidateNationality("Nationality3", value, _counter, ref _messageTemp))
+                            AddData(newCustomTableItem, row, "Nationality3", value);
+                    }
+
+                    if (CommonValidation("Nationality4", row))
+                    {
+                        string value = row["Nationality4"].ToString().Trim();
+                        if (ValidateNationality("Nationality4", value, _counter, ref _messageTemp))
+                            AddData(newCustomTableItem, row, "Nationality4", value);
+                    }
+
+                    if (CommonValidation("DateofBirth", row))
+                    {
+                        AddData(newCustomTableItem, row, "DateofBirth");
+                    }
+
+                    if (CommonValidation("DateOfDeath", row))
+                    {
+                        AddData(newCustomTableItem, row, "DateOfDeath");
+                    }
+
+                    if (CommonValidation("YearOfBirth", row))
+                    {
+                        string value = row["YearOfBirth"].ToString();
+
+                        if (ValidateYear("YearOfBirth", value, _counter, ref _messageTemp))
+                        {
+                            AddData(newCustomTableItem, row, "YearOfBirth", value);
+                        }
+                    }
+
+                    if (CommonValidation("YearOfDeath", row))
+                    {
+                        string value = row["YearOfDeath"].ToString();
+
+                        if (ValidateYear("YearOfDeath", value, _counter, ref _messageTemp))
+                        {
+                            AddData(newCustomTableItem, row, "YearOfDeath", value);
+                        }
+                    }
+
+                    object _InCopyright = row["InCopyright"];
+                    if (CommonValidation("InCopyright", row))
+                    {
+                        bool temp = false;
+                        if (ValidateBoolValue("InCopyright", _InCopyright, _counter, ref _messageTemp, ref temp))
+                            AddData(newCustomTableItem, row, "InCopyright", temp);
+                    }
+
+                    object _ImageHire = row["ImageHire"];
+                    if (CommonValidation("ImageHire", row))
+                    {
+                        bool temp = false;
+                        if (ValidateBoolValue("ImageHire", _ImageHire, _counter, ref _messageTemp, ref temp))
+                            AddData(newCustomTableItem, row, "ImageHire", temp);
+                    }
+
+                    if (CommonValidation("ARRMembership", row))
+                    {
+                        string value = row["ARRMembership"].ToString().Trim();
+                        if (ValidateDateFromCustomTableFieldDropdown("customtable.ArtistDetails", "ARRMembership", value, _counter, ref _messageTemp))
+                            AddData(newCustomTableItem, row, "ARRMembership", value);
+                    }
+
+                    if (CommonValidation("ARRSisterSociety", row))
+                    {
+                        AddData(newCustomTableItem, row, "ARRSisterSociety");
+                    }
+
+                    if (CommonValidation("ARRPaidRoyalties", row))
+                    {
+                        string value = row["ARRPaidRoyalties"].ToString().Trim();
+                        if (ValidateDateFromCustomTableFieldDropdown("customtable.ArtistDetails", "ARRPaidRoyalties", value, _counter, ref _messageTemp))
+                            AddData(newCustomTableItem, row, "ARRPaidRoyalties", value);
+                    }
+
+                    if (CommonValidation("ARRConfirmedNationality", row))
+                    {
+                        string value = row["ARRConfirmedNationality"].ToString().Trim();
+                        if (ValidateDateFromCustomTableFieldDropdown("customtable.ArtistDetails", "ARRConfirmedNationality", value, _counter, ref _messageTemp))
+                            AddData(newCustomTableItem, row, "ARRConfirmedNationality", value);
+                    }
+
+                    if (CommonValidation("CLMemebershipType", row))
+                    {
+                        string value = row["CLMemebershipType"].ToString().Trim();
+                        if (ValidateDateFromCustomTableFieldDropdown("customtable.ArtistDetails", "CLMemebershipType", value, _counter, ref _messageTemp))
+                            AddData(newCustomTableItem, row, "CLMemebershipType", value);
+                    }
+
+                    if (CommonValidation("CLSisterSociety", row))
+                    {
+                        AddData(newCustomTableItem, row, "CLSisterSociety");
+                    }
+
+                    object _CLRightsMultimediaOnly = row["CLRightsMultimediaOnly"];
+                    if (CommonValidation("CLRightsMultimediaOnly", row))
+                    {
+                        bool temp = false;
+                        if (ValidateBoolValue("CLRightsMultimediaOnly", _CLRightsMultimediaOnly, _counter, ref _messageTemp, ref temp))
+                            AddData(newCustomTableItem, row, "CLRightsMultimediaOnly", temp);
+                    }
+
+                    object _CLRightsExcludingMultimedia = row["CLRightsExcludingMultimedia"];
+                    if (CommonValidation("CLRightsExcludingMultimedia", row))
+                    {
+                        bool temp = false;
+                        if (ValidateBoolValue("CLRightsExcludingMultimedia", _CLRightsExcludingMultimedia, _counter, ref _messageTemp, ref temp))
+                            AddData(newCustomTableItem, row, "CLRightsExcludingMultimedia", temp);
+                    }
+
+                    object _CLRightsExcludingMerchandise = row["CLRightsExcludingMerchandise"];
+                    if (CommonValidation("CLRightsExcludingMerchandise", row))
+                    {
+                        bool temp = false;
+                        if (ValidateBoolValue("CLRightsExcludingMerchandise", _CLRightsExcludingMerchandise, _counter, ref _messageTemp, ref temp))
+                            AddData(newCustomTableItem, row, "CLRightsExcludingMerchandise", temp);
+                    }
+
+                    object _CLRightsAuctionHouseOnly = row["CLRightsAuctionHouseOnly"];
+                    if (CommonValidation("CLRightsAuctionHouseOnly", row))
+                    {
+                        bool temp = false;
+                        if (ValidateBoolValue("CLRightsAuctionHouseOnly", _CLRightsAuctionHouseOnly, _counter, ref _messageTemp, ref temp))
+                            AddData(newCustomTableItem, row, "CLRightsAuctionHouseOnly", temp);
+                    }
+
+                    object _CLFullConsultation = row["CLFullConsultation"];
+                    if (CommonValidation("CLFullConsultation", row))
+                    {
+                        bool temp = false;
+                        if (ValidateBoolValue("CLFullConsultation", _CLFullConsultation, _counter, ref _messageTemp, ref temp))
+                            AddData(newCustomTableItem, row, "CLFullConsultation", temp);
+                    }
+
+                    if (string.IsNullOrEmpty(_messageTemp))
+                    {
+                        if (itemID == 0)
+                            newCustomTableItem.Insert();
+                        else
+                            newCustomTableItem.Update();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message.Contains("does not belong to table"))
+                    {
+                        DataSet dsArtist = DataClassInfoProvider.GetDataSet(customTableClassName);
+
+                        List<string> dbColumnNames = dsArtist.Tables[0].Columns.Cast<DataColumn>()
+                                  .Select(x => x.ColumnName)
+                                  .ToList();
+
+                        List<string> XLColumnNames = dtData.Columns.Cast<DataColumn>()
+                                 .Select(x => x.ColumnName)
+                                 .ToList();
+
+                        string missmatchFields = "";
+
+                        foreach (string item in XLColumnNames)
+                        {
+                            if (dbColumnNames.Where(x => x == item).Count() == 0)
+                            {
+                                if (item != "DELETE" && item != "UPDATE" && item != "INSERT")
+                                    missmatchFields += item + ",";
+                            }
+                        }
+
+                        _messageTemp += "ROW:" + _counter + " |" + ex.Message
+                            + Environment.NewLine
+                            + "Mismatch fields in XL File: "
+                            + missmatchFields
+                            + Environment.NewLine
+                            + "Available fields in the table: "
+                            + dbColumnNames.Join(",") + Environment.NewLine + Environment.NewLine;
+                    }
+                    else
+                    {
+                        _messageTemp += "ROW:" + _counter + " |" + ex.Message + Environment.NewLine;
+                    }
+                }
+
+                errorMessage += _messageTemp;
+            }
+
+        }
+        else
+        {
+            throw new ApplicationException(customTableClassName + " custom table does not exist.");
+        }
+
+        CMS.EventLog.EventLogProvider.LogInformation(EVENT_LOG_SOURCE, "ImportData", "Data import completed for " + customTableClassName);
+    }
+    private void CreateErrorPage(string filePath, string errorMessage)
+    {
+        CleanUpPreviousFiles();
+        File.Delete(filePath + ".txt");
+        File.WriteAllText(filePath + ".txt", errorMessage);
+    }
+    private void CleanUpPreviousFiles()
+    {
+        DateTime searchDate = DateTime.Now.AddDays(-10);
+        var directory = new DirectoryInfo(Server.MapPath(FileStoragePath));
+
+        var files = from c in directory.GetFiles()
+                    where c.CreationTime < searchDate
+                    select c;
+
+        foreach (FileInfo file in files)
+        {
+            file.Delete();
+        }
+    }
+    private bool CommonValidation(string fieldName, DataRow row)
+    {
+        bool returnVal = false;
+        object _currentFiled = row[fieldName];
+        string _currentFieldString = _currentFiled.ToString().Trim();
+
+        // object _fieldType = _currentFiled.GetType();
+
+        if (_currentFiled != DBNull.Value && (!string.IsNullOrEmpty(_currentFieldString))
+            && (_currentFieldString.ToLower() != "null"))
+        {
+            returnVal = true;
+        }
+
+        return returnVal;
+    }
+
+    private void AddData(CustomTableItem newCustomTableItem, DataRow row, string fieldName, object processedValue = null)
+    {
+        if (row[fieldName].ToString() != "NULL")
+        {
+            if (processedValue == null)
+            {
+                Type type = row[fieldName].GetType();
+
+                if (type == typeof(string))
+                {
+                    newCustomTableItem.SetValue(fieldName, row[fieldName].ToString());
+                }
+                else if (type == typeof(int))
+                {
+                    newCustomTableItem.SetValue(fieldName, Convert.ToInt32(row[fieldName]));
+                }
+                else if (type == typeof(bool))
+                {
+                    newCustomTableItem.SetValue(fieldName, processedValue);
+                }
+                else if (type == typeof(DateTime))
+                {
+                    newCustomTableItem.SetValue(fieldName, Convert.ToDateTime(row[fieldName]));
+                }
+                else
+                {
+                    newCustomTableItem.SetValue(fieldName, row[fieldName].ToString());
+                }
+            }
+            else
+            {
+                newCustomTableItem.SetValue(fieldName, processedValue);
+            }
+        }
+        else
+        {
+            newCustomTableItem.SetValue(fieldName, null);
+        }
+
+    }
+    private bool ValidateYear(string field, string value, int rowNo, ref string errorMessage)
+    {
+        bool _result = true;
+
+        string strValue = value.ToString().Trim().ToLower();
+
+        if (strValue == "null") return true;
+
+        int intValue;
+        if ((!int.TryParse(value, out intValue)) || (value.Length != 4))
+        {
+            errorMessage += "ROW:" + rowNo + " | " + field + " : " + value + " is an invalid value. Please provide a 4 digit integer value. eg: 1974" + Environment.NewLine;
+            _result = false;
+        }
+
+        return _result;
+    }
+    private bool ValidateNationality(string field, string value, int rowNo, ref string errorMessage)
+    {
+        bool _result = true;
+
+        string strValue = value.ToString().Trim().ToLower();
+
+        if (strValue == "null") return true;
+
+        string customTableClassName = "customtable.Nationality";
+        CustomTableItemProvider customTableProvider = new CustomTableItemProvider(CMSContext.CurrentUser);
+
+        //CustomTableItem newCustomTableItem = new CustomTableItem(customTableClassName, customTableProvider);
+
+        //DataClassInfo customTable = DataClassInfoProvider.GetDataClass(customTableClassName);
+        string where = string.Format("Country = N'{0}'", value);
+        int topN = 1;
+        string columns = "ItemID";
+
+        DataSet dataSet = customTableProvider.GetItems(customTableClassName, where, null, topN, columns);
+
+        if (!DataHelper.DataSourceIsEmpty(dataSet))
+        {
+            // Get the custom table item ID
+            int itemID = ValidationHelper.GetInteger(dataSet.Tables[0].Rows[0][0], 0);
+
+            return true;
+        }
+        else
+        {
+            errorMessage += "ROW:" + rowNo + " | " + field + " : " + value + " is an invalid value. Please provide a valid country value. eg: Australia To see what all the valid values are, see the Nationality (customtable.Nationality) custom table." + Environment.NewLine;
+            _result = false;
+        }
+
+
+        return _result;
+    }
+    private bool ValidateBoolValue(string field, object value, int rowNo, ref string errorMessage, ref bool resultValue)
+    {
+        bool result = true;
+
+        string strValue = value.ToString().Trim().ToLower();
+
+        if (strValue == "null") return true;
+
+        if (strValue == "1"
+            || strValue == "0"
+            || strValue == "true"
+            || strValue == "false")
+
+        {
+            if (strValue == "1" || strValue == "true")
+                resultValue = true;
+            else if (strValue == "0" || strValue == "false")
+                resultValue = false;
+        }
+        else
+        {
+            errorMessage += "ROW:" + rowNo + " | " + field + " : " + value + " is an invalid value. Please provide a valid Boolean value. eg: 0,1,true,false." + Environment.NewLine;
+            result = false;
+        }
+
+        return result;
+
+    }
+    private bool ValidateDateFromCustomTableFieldDropdown(string tableName, string filedName, string value, int rowNo, ref string errorMessage)
+    {
+        bool _result = false;
+
+        string strValue = value.ToString().Trim().ToLower();
+
+        if (strValue == "null") return true;
+
+        List<string> items = new List<string>();
+        DataClassInfo classInfo = DataClassInfoProvider.GetDataClass(tableName);
+
+        if (classInfo != null)
+        {
+            FormInfo info = new FormInfo(classInfo.ClassFormDefinition);
+            FormFieldInfo field = info.GetFormField(filedName);
+
+            if (field != null)
+            {
+                string rawData = field.Settings["options"].ToString();
+                string[] rawDataPart = rawData.Replace("\r", string.Empty).Split('\n');
+
+                foreach (string item in rawDataPart)
+                {
+                    string _temp = item.Split(';')[0].Trim();
+
+                    if (value == _temp) _result = true;
+                }
+
+                if (!_result)
+                    errorMessage += "ROW:" + rowNo + " | " + field + " : " + value + " is an invalid value. Please provide a valid " + filedName + " value. To see what all the valid values are, see the Nationality (customtable.ArtistDetails) custom table." + Environment.NewLine;
+            }
+        }
+
+        return _result;
+    }
+
+    #endregion
+}

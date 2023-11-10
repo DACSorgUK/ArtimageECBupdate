@@ -1,0 +1,12 @@
+FAQ modules in https://www.dacs.org.uk/licensing-works/ link to wrong FAQs
+-----------
+transformation:
+parentquestionpagelinksLicensingWork
+html :
+<li class="destination"><a href="/knowledge-base/frequently-asked-questions#FAQ<%# Eval("FAQID") %>">
+<%# Eval("FAQQuestion",true) %></a></li>
+-->
+
+160802-DACS - #138 - Incorrect FAQ links in side module 
+160803-DACS - #137 - Changes to text in Copyright Advice enquiry form
+160805-DACS - Bulk uploads to website

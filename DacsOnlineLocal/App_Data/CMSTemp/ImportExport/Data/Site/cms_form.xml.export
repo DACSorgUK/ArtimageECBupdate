@@ -1,0 +1,442 @@
+﻿<cms_form version="6.0">
+  <NewDataSet>
+    <cms_form>
+      <FormID>5</FormID>
+      <FormDisplayName>Copyright Advice for Artists</FormDisplayName>
+      <FormName>CopyrightAdviceforArtists</FormName>
+      <FormSendToEmail>lance@lancetek.com</FormSendToEmail>
+      <FormSendFromEmail>forms@dacs.org.uk</FormSendFromEmail>
+      <FormEmailSubject>Copyright advice for artists submission</FormEmailSubject>
+      <FormEmailAttachUploadedDocs>true</FormEmailAttachUploadedDocs>
+      <FormClassID>2983</FormClassID>
+      <FormItems>4</FormItems>
+      <FormDisplayText>Thank you, your enquiry has now been submitted and a copy  has been sent to your email address for your records.   Our copyright advisor will call you back within 2 working days during office hours.</FormDisplayText>
+      <FormClearAfterSave>false</FormClearAfterSave>
+      <FormSubmitButtonText>Submit</FormSubmitButtonText>
+      <FormSiteID>1</FormSiteID>
+      <FormConfirmationEmailField>email</FormConfirmationEmailField>
+      <FormConfirmationTemplate>&lt;table&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:CopyrightAdviceforArtistsID$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:CopyrightAdviceforArtistsID$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:Name$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:Name$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:membership$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:membership$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:memberType$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:memberType$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:phone$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:phone$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:time2call$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:time2call$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:email$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:email$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:topic$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:topic$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:message$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:message$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:file1$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:file1$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:file2$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:file2$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:file3$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:file3$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:FormInserted$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:FormInserted$$&lt;/td&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;td&gt;
+				$$label:FormUpdated$$&lt;/td&gt;
+			&lt;td&gt;
+				$$value:FormUpdated$$&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;</FormConfirmationTemplate>
+      <FormConfirmationSendFromEmail>no-reply@webportglobal.com</FormConfirmationSendFromEmail>
+      <FormConfirmationEmailSubject>Your DACS copyright advice enquiry</FormConfirmationEmailSubject>
+      <FormGUID>d9bebda2-ed8c-4570-92d4-1e625e2db708</FormGUID>
+      <FormLastModified>2015-12-21T19:16:03.877+00:00</FormLastModified>
+      <FormLogActivity>true</FormLogActivity>
+    </cms_form>
+    <cms_class>
+      <ClassID>2983</ClassID>
+      <ClassDisplayName>Copyright Advice for Artists</ClassDisplayName>
+      <ClassName>BizForm.CopyrightAdviceforArtists</ClassName>
+      <ClassUsesVersioning>false</ClassUsesVersioning>
+      <ClassIsDocumentType>false</ClassIsDocumentType>
+      <ClassIsCoupledClass>true</ClassIsCoupledClass>
+      <ClassXmlSchema>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"&gt;
+  &lt;xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true"&gt;
+    &lt;xs:complexType&gt;
+      &lt;xs:choice minOccurs="0" maxOccurs="unbounded"&gt;
+        &lt;xs:element name="Form_DACSO_CopyrightAdviceforArtists"&gt;
+          &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+              &lt;xs:element name="CopyrightAdviceforArtistsID" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" /&gt;
+              &lt;xs:element name="FormInserted" type="xs:dateTime" /&gt;
+              &lt;xs:element name="FormUpdated" type="xs:dateTime" /&gt;
+              &lt;xs:element name="Name"&gt;
+                &lt;xs:simpleType&gt;
+                  &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:maxLength value="500" /&gt;
+                  &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name="membership"&gt;
+                &lt;xs:simpleType&gt;
+                  &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:maxLength value="500" /&gt;
+                  &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name="memberType"&gt;
+                &lt;xs:simpleType&gt;
+                  &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:maxLength value="500" /&gt;
+                  &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name="phone"&gt;
+                &lt;xs:simpleType&gt;
+                  &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:maxLength value="100" /&gt;
+                  &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name="time2call" minOccurs="0"&gt;
+                &lt;xs:simpleType&gt;
+                  &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:maxLength value="500" /&gt;
+                  &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name="email" minOccurs="0"&gt;
+                &lt;xs:simpleType&gt;
+                  &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:maxLength value="500" /&gt;
+                  &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name="topic"&gt;
+                &lt;xs:simpleType&gt;
+                  &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:maxLength value="500" /&gt;
+                  &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name="message"&gt;
+                &lt;xs:simpleType&gt;
+                  &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:maxLength value="1000" /&gt;
+                  &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name="file1" minOccurs="0"&gt;
+                &lt;xs:simpleType&gt;
+                  &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:maxLength value="500" /&gt;
+                  &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name="file2" minOccurs="0"&gt;
+                &lt;xs:simpleType&gt;
+                  &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:maxLength value="500" /&gt;
+                  &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+              &lt;/xs:element&gt;
+              &lt;xs:element name="file3" minOccurs="0"&gt;
+                &lt;xs:simpleType&gt;
+                  &lt;xs:restriction base="xs:string"&gt;
+                    &lt;xs:maxLength value="500" /&gt;
+                  &lt;/xs:restriction&gt;
+                &lt;/xs:simpleType&gt;
+              &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+          &lt;/xs:complexType&gt;
+        &lt;/xs:element&gt;
+      &lt;/xs:choice&gt;
+    &lt;/xs:complexType&gt;
+    &lt;xs:unique name="Constraint1" msdata:PrimaryKey="true"&gt;
+      &lt;xs:selector xpath=".//Form_DACSO_CopyrightAdviceforArtists" /&gt;
+      &lt;xs:field xpath="CopyrightAdviceforArtistsID" /&gt;
+    &lt;/xs:unique&gt;
+  &lt;/xs:element&gt;
+&lt;/xs:schema&gt;</ClassXmlSchema>
+      <ClassFormDefinition>&lt;form&gt;&lt;field column="CopyrightAdviceforArtistsID" fieldcaption="CopyrightAdviceforArtistsID" visible="true" columntype="integer" fieldtype="CustomUserControl" allowempty="false" isPK="true" system="false" publicfield="false" spellcheck="true" guid="fdbde684-27d0-4373-9eec-cd1b56cc157f" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;controlname&gt;labelcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="Name" fieldcaption="Name" visible="true" columntype="text" fieldtype="CustomUserControl" allowempty="false" isPK="false" system="false" columnsize="500" publicfield="true" spellcheck="true" guid="843fc46e-7679-4989-9127-b95091788ab3" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;controlname&gt;textboxcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="membership" fieldcaption="Membership" visible="true" columntype="text" fieldtype="CustomUserControl" allowempty="false" isPK="false" system="false" columnsize="500" publicfield="true" spellcheck="true" guid="de300d10-71be-4bf0-8e8a-f84e96bc6b73" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;Options&gt;;Please select
+Artist;Artist
+Beneficiary;Beneficiary
+Non member;Non member&lt;/Options&gt;&lt;controlname&gt;dropdownlistcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="memberType" fieldcaption="What type of member are you?" visible="true" columntype="text" fieldtype="CustomUserControl" allowempty="false" isPK="false" system="false" columnsize="500" publicfield="true" spellcheck="true" guid="8c31c523-07ab-4351-90eb-298085614b4c" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;Options&gt;;Please select one of the following: 
+Copyright Licensing;Copyright Licensing
+Artist’s Resale Right;Artist’s Resale Right
+Payback;Payback&lt;/Options&gt;&lt;controlname&gt;dropdownlistcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="phone" fieldcaption="Phone number" visible="true" columntype="text" fieldtype="CustomUserControl" allowempty="false" isPK="false" system="false" columnsize="100" publicfield="true" spellcheck="true" guid="ecfedb22-f21b-48cd-8c5a-8f2379cee406" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;controlname&gt;textboxcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="time2call" fieldcaption="Appropriate time to call" visible="true" defaultvalue="100" columntype="text" fieldtype="CustomUserControl" allowempty="true" isPK="false" system="false" columnsize="500" publicfield="true" spellcheck="true" guid="5111383a-c6b5-4efe-9814-29a0b63cc251" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;controlname&gt;textboxcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="email" fieldcaption="Email address" visible="true" columntype="text" fieldtype="CustomUserControl" allowempty="true" isPK="false" system="false" columnsize="500" publicfield="true" spellcheck="true" guid="d790a3f0-45e3-49e1-b81a-f529a2d6b0ea" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;controlname&gt;textboxcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="topic" fieldcaption="Does your query relate to" visible="true" columntype="text" fieldtype="CustomUserControl" allowempty="false" isPK="false" system="false" columnsize="500" publicfield="true" spellcheck="true" guid="81b48a9b-e719-4075-bbba-d43a5233e3f0" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;Options&gt;;Please select one of the following
+Copyright Infringement;Copyright Infringement
+Other;Other&lt;/Options&gt;&lt;controlname&gt;dropdownlistcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="message" fieldcaption="Enquiry/Message" visible="true" columntype="text" fieldtype="CustomUserControl" allowempty="false" isPK="false" system="false" columnsize="1000" publicfield="true" spellcheck="true" guid="390b71b0-010e-4e47-8f65-1257dc1ae38a" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;controlname&gt;textareacontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="file1" fieldcaption="File #1" visible="true" columntype="text" fieldtype="CustomUserControl" allowempty="true" isPK="false" system="false" columnsize="500" publicfield="true" spellcheck="true" guid="7789bce8-415d-4288-8510-3c1bf671440e" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;Allowed_Extensions&gt;pdf;doc;docx;ppt;pptx;xls;xlsx;htm;html;xml;bmp;gif;jpg;jpeg;png;wav;wma;wmv;mp3;mp4;mpg;mpeg;mov;avi;swf;rar;zip;txt;rtf&lt;/Allowed_Extensions&gt;&lt;Extensions&gt;inherit&lt;/Extensions&gt;&lt;Autoresize_Hashtable&gt;True&lt;/Autoresize_Hashtable&gt;&lt;controlname&gt;uploadcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="file2" fieldcaption="File #2" visible="true" columntype="text" fieldtype="CustomUserControl" allowempty="true" isPK="false" system="false" columnsize="500" publicfield="true" spellcheck="true" guid="7ab2a1f0-ba43-46a3-975d-306decca62e8" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;Allowed_Extensions&gt;pdf;doc;docx;ppt;pptx;xls;xlsx;htm;html;xml;bmp;gif;jpg;jpeg;png;wav;wma;wmv;mp3;mp4;mpg;mpeg;mov;avi;swf;rar;zip;txt;rtf&lt;/Allowed_Extensions&gt;&lt;Extensions&gt;inherit&lt;/Extensions&gt;&lt;Autoresize_Hashtable&gt;True&lt;/Autoresize_Hashtable&gt;&lt;controlname&gt;uploadcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="file3" fieldcaption="File #3" visible="true" columntype="text" fieldtype="CustomUserControl" allowempty="true" isPK="false" system="false" columnsize="500" publicfield="true" spellcheck="true" guid="53098af8-9679-491d-a239-7567a16e9f11" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;Extensions&gt;inherit&lt;/Extensions&gt;&lt;Autoresize_Hashtable&gt;True&lt;/Autoresize_Hashtable&gt;&lt;Allowed_Extensions&gt;pdf;doc;docx;ppt;pptx;xls;xlsx;htm;html;xml;bmp;gif;jpg;jpeg;png;wav;wma;wmv;mp3;mp4;mpg;mpeg;mov;avi;swf;rar;zip;txt;rtf&lt;/Allowed_Extensions&gt;&lt;controlname&gt;uploadcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="FormInserted" fieldcaption="Form inserted" visible="false" columntype="datetime" fieldtype="CustomUserControl" allowempty="false" isPK="false" system="true" publicfield="false" spellcheck="true" guid="8b7b9dd8-2071-4ff0-a27f-9a78b84e1538" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;controlname&gt;calendarcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;field column="FormUpdated" fieldcaption="Form updated" visible="false" columntype="datetime" fieldtype="CustomUserControl" allowempty="false" isPK="false" system="true" publicfield="false" spellcheck="true" guid="20914d51-1597-442a-abd6-261c84acaffd" ismacro="false" hasdependingfields="false" dependsonanotherfield="false"&gt;&lt;settings&gt;&lt;controlname&gt;calendarcontrol&lt;/controlname&gt;&lt;/settings&gt;&lt;/field&gt;&lt;/form&gt;</ClassFormDefinition>
+      <ClassEditingPageUrl></ClassEditingPageUrl>
+      <ClassListPageUrl></ClassListPageUrl>
+      <ClassNodeNameSource></ClassNodeNameSource>
+      <ClassTableName>Form_DACSO_CopyrightAdviceforArtists</ClassTableName>
+      <ClassViewPageUrl></ClassViewPageUrl>
+      <ClassPreviewPageUrl></ClassPreviewPageUrl>
+      <ClassFormLayout>
+	
+&lt;fieldset&gt;
+	&lt;div class="text threequarters"&gt;	
+	&lt;label for="membership"&gt;$$label:membership$$ &lt;abbr title="Required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+	$$input:membership$$&lt;em class="red"&gt;$$validation:membership$$&lt;/em&gt;&lt;/div&gt;		
+
+	&lt;div class="text threequarters"&gt;
+	&lt;label for="memberType"&gt;$$label:memberType$$ &lt;abbr title="Required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+	$$input:memberType$$&lt;em class="red"&gt;$$validation:memberType$$&lt;/em&gt;&lt;/div&gt;	
+&lt;/fieldset&gt;	
+
+&lt;div id="memberform"&gt;
+	&lt;fieldset&gt;
+		&lt;legend class="first-child"&gt;Your Details&lt;/legend&gt;&lt;br /&gt;
+	
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="Name"&gt;$$label:Name$$ &lt;abbr title="Required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+		$$input:Name$$&lt;em class="red"&gt;$$validation:Name$$&lt;/em&gt;&lt;/div&gt;
+
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="phone"&gt;$$label:phone$$ &lt;abbr title="Required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+		$$input:phone$$&lt;em class="red"&gt;$$validation:phone$$&lt;/em&gt;&lt;/div&gt;	
+
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="time2call"&gt;$$label:time2call$$&lt;/label&gt;
+		$$input:time2call$$&lt;em class="red"&gt;$$validation:time2call$$&lt;/em&gt;&lt;/div&gt;		
+		
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="email"&gt;$$label:email$$&lt;/label&gt;
+		$$input:email$$&lt;em class="red"&gt;$$validation:email$$&lt;/em&gt;&lt;/div&gt;	
+
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="topic"&gt;$$label:topic$$ &lt;abbr title="Required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+		$$input:topic$$&lt;em class="red"&gt;$$validation:topic$$&lt;/em&gt;&lt;/div&gt;	
+
+		
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="message"&gt;$$label:message$$ &lt;abbr title="Required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+		$$input:message$$&lt;em class="red"&gt;$$validation:message$$&lt;/em&gt;&lt;/div&gt;	
+
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="file1"&gt;$$label:file1$$&lt;/label&gt;
+		$$input:file1$$&lt;em class="red"&gt;$$validation:file1$$&lt;/em&gt;&lt;/div&gt;	
+		
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="file2"&gt;$$label:file2$$ &lt;/label&gt;
+		$$input:file2$$&lt;em class="red"&gt;$$validation:file2$$&lt;/em&gt;&lt;/div&gt;	
+		
+		&lt;div class="text threequarters"&gt;	
+		&lt;label for="file3"&gt;$$label:file3$$ &lt;/label&gt;
+		$$input:file3$$&lt;em class="red"&gt;$$validation:file3$$&lt;/em&gt;&lt;/div&gt;	
+		
+	&lt;/fieldset&gt;	
+		$$submitbutton$$
+&lt;/div&gt;
+	
+	
+&lt;script type="text/javascript"&gt;
+$(function() {
+	showForm();
+	$("select.[id*='membership'], select.[id*='memberType']").change(function(){showForm()});
+	
+
+});
+
+function showForm(){
+	var ms = $("select.[id*='membership']");
+	var mt = $("select.[id*='memberType']");
+
+	console.log(ms.val());
+	console.log(mt.val());
+	
+	if(ms.val().toLowerCase() == 'non member' || mt.val().toLowerCase() == 'payback'){
+		console.log('go to knowledgebase');
+		location.href = '/knowledge-base';
+	}else if(mt.val() != '' &amp;&amp;
+			mt.val().toLowerCase().indexOf('please') &lt;1 &amp;&amp;
+			ms.val() != '' &amp;&amp;
+			ms.val().toLowerCase().indexOf('please') &lt;1){
+			
+		$('#memberform').show();
+	}else{
+		$('#memberform').hide();
+	}
+}
+
+&lt;/script&gt;</ClassFormLayout>
+      <ClassNewPageUrl></ClassNewPageUrl>
+      <ClassShowAsSystemTable>false</ClassShowAsSystemTable>
+      <ClassUsePublishFromTo>false</ClassUsePublishFromTo>
+      <ClassShowTemplateSelection>false</ClassShowTemplateSelection>
+      <ClassSKUMappings></ClassSKUMappings>
+      <ClassIsMenuItemType>false</ClassIsMenuItemType>
+      <ClassNodeAliasSource></ClassNodeAliasSource>
+      <ClassLastModified>2015-12-21T19:33:04.33+00:00</ClassLastModified>
+      <ClassGUID>60f348d2-9b3e-42d0-8060-a6b3ede3aee1</ClassGUID>
+      <ClassCreateSKU>false</ClassCreateSKU>
+      <ClassIsProduct>false</ClassIsProduct>
+      <ClassIsCustomTable>false</ClassIsCustomTable>
+      <ClassShowColumns></ClassShowColumns>
+      <ClassLoadGeneration>0</ClassLoadGeneration>
+      <ClassSearchTitleColumn></ClassSearchTitleColumn>
+      <ClassSearchContentColumn></ClassSearchContentColumn>
+      <ClassSearchImageColumn></ClassSearchImageColumn>
+      <ClassSearchCreationDateColumn></ClassSearchCreationDateColumn>
+      <ClassSearchSettings></ClassSearchSettings>
+      <ClassSearchEnabled>true</ClassSearchEnabled>
+      <ClassSKUDefaultDepartmentName></ClassSKUDefaultDepartmentName>
+      <ClassContactOverwriteEnabled>false</ClassContactOverwriteEnabled>
+      <ClassSKUDefaultProductType>PRODUCT</ClassSKUDefaultProductType>
+    </cms_class>
+    <cms_alternativeform>
+      <FormID>1069</FormID>
+      <FormDisplayName>publicview</FormDisplayName>
+      <FormName>publicview</FormName>
+      <FormClassID>2983</FormClassID>
+      <FormLayout>
+	
+&lt;fieldset&gt;
+	&lt;div class="text threequarters"&gt;	
+	&lt;label for="membership"&gt;$$label:membership$$ &lt;abbr title="Required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+	$$input:membership$$&lt;em class="red"&gt;$$validation:membership$$&lt;/em&gt;&lt;/div&gt;		
+
+	&lt;div class="text threequarters"&gt;
+	&lt;label for="memberType"&gt;$$label:memberType$$ &lt;abbr title="Required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+	$$input:memberType$$&lt;em class="red"&gt;$$validation:memberType$$&lt;/em&gt;&lt;/div&gt;	
+&lt;/fieldset&gt;	
+
+&lt;div id="memberform"&gt;
+	&lt;fieldset&gt;
+		&lt;legend class="first-child"&gt;Your Details&lt;/legend&gt;&lt;br /&gt;
+	
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="Name"&gt;$$label:Name$$ &lt;abbr title="Required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+		$$input:Name$$&lt;em class="red"&gt;$$validation:Name$$&lt;/em&gt;&lt;/div&gt;
+
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="phone"&gt;$$label:phone$$ &lt;abbr title="Required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+		$$input:phone$$&lt;em class="red"&gt;$$validation:phone$$&lt;/em&gt;&lt;/div&gt;	
+
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="time2call"&gt;$$label:time2call$$&lt;/label&gt;
+		$$input:time2call$$&lt;em class="red"&gt;$$validation:time2call$$&lt;/em&gt;&lt;/div&gt;		
+		
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="email"&gt;$$label:email$$&lt;/label&gt;
+		$$input:email$$&lt;em class="red"&gt;$$validation:email$$&lt;/em&gt;&lt;/div&gt;	
+
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="topic"&gt;$$label:topic$$ &lt;abbr title="Required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+		$$input:topic$$&lt;em class="red"&gt;$$validation:topic$$&lt;/em&gt;&lt;/div&gt;	
+
+		
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="message"&gt;$$label:message$$ &lt;abbr title="Required"&gt;*&lt;/abbr&gt;&lt;/label&gt;
+		$$input:message$$&lt;em class="red"&gt;$$validation:message$$&lt;/em&gt;&lt;/div&gt;	
+
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="file1"&gt;$$label:file1$$&lt;/label&gt;
+		$$input:file1$$&lt;em class="red"&gt;$$validation:file1$$&lt;/em&gt;&lt;/div&gt;	
+		
+		&lt;div class="text threequarters"&gt;
+		&lt;label for="file2"&gt;$$label:file2$$ &lt;/label&gt;
+		$$input:file2$$&lt;em class="red"&gt;$$validation:file2$$&lt;/em&gt;&lt;/div&gt;	
+		
+		&lt;div class="text threequarters"&gt;	
+		&lt;label for="file3"&gt;$$label:file3$$ &lt;/label&gt;
+		$$input:file3$$&lt;em class="red"&gt;$$validation:file3$$&lt;/em&gt;&lt;/div&gt;	
+		
+	&lt;/fieldset&gt;	
+		$$submitbutton$$
+&lt;/div&gt;
+	
+	
+&lt;script type="text/javascript"&gt;
+$(function() {
+	showForm();
+	$("select.[id*='membership'], select.[id*='memberType']").change(function(){showForm()});
+	
+
+});
+
+function showForm(){
+	var ms = $("select.[id*='membership']");
+	var mt = $("select.[id*='memberType']");
+
+	console.log(ms.val());
+	console.log(mt.val());
+	
+	if(ms.val().toLowerCase() == 'non member' || mt.val().toLowerCase() == 'payback'){
+		console.log('go to knowledgebase');
+		location.href = '/knowledge-base';
+	}else if(mt.val() != '' &amp;&amp;
+			mt.val().toLowerCase().indexOf('please') &lt;1 &amp;&amp;
+			ms.val() != '' &amp;&amp;
+			ms.val().toLowerCase().indexOf('please') &lt;1){
+			
+		$('#memberform').show();
+	}else{
+		$('#memberform').hide();
+	}
+}
+
+&lt;/script&gt;</FormLayout>
+      <FormGUID>7e971f9d-1bd9-4239-a0db-77644622a256</FormGUID>
+      <FormLastModified>2015-12-21T19:33:04.317+00:00</FormLastModified>
+    </cms_alternativeform>
+  </NewDataSet>
+</cms_form>

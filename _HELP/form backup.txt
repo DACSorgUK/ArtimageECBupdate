@@ -1,0 +1,122 @@
+<fieldset>
+	<legend class="first-child">Personal Details</legend><br />
+	<br />
+	<div class="colgroup">
+		$$label:Title$$<abbr title="Required">*</abbr>
+		<div class="colgroup text">
+			<div class="left">
+				$$input:Title$$</div>
+			<div class="third left">
+				$$input:FirstNames$$</div>
+			<div class="third left">
+				$$input:LastName$$</div>
+		</div>
+		<em class="red">$$validation:Title$$</em> <em class="red">$$validation:FirstNames$$</em> <em class="red">$$validation:LastName$$</em></div>
+	<div class="text third">
+		<label for="dateofbirth">$$label:DateofBirth$$<abbr title="Required">*</abbr> </label> $$input:DateofBirth$$<em class="red">$$validation:DateofBirth$$</em></div>
+	<label for="nationality">$$label:Nationality$$ <abbr title="Required">*</abbr></label>
+	<div class="text threequarters">
+		$$input:Nationality$$<em class="red">$$validation:Nationality$$</em></div>
+	<div class="text threequarters">
+		<label for="pseudonyms">$$label:Pseudonym$$ </label> $$input:Pseudonym$$<em class="red">$$validation:Pseudonym$$</em></div>
+	<div class="text threequarters">
+		<label class="first-child" for="text33">$$label:Address$$<abbr title="Required">*</abbr> </label> $$input:Address$$ <label class="first-child" for="text33"><em class="red">$$validation:AddresLine2$$</em> </label> $$input:AddresLine2$$ <label class="first-child" for="text33"> </label> $$input:AddresLine3$$<em class="red">$$validation:AddresLine3$$</em><em class="red">$$validation:Address$$</em></div>
+	<div class="text threequarters">
+		<label for="address-city">$$label:City$$ <abbr title="Required">*</abbr></label> $$input:City$$<em class="red">$$validation:City$$</em></div>
+	<div class="colgroup threequarters">
+		<div class="column half text">
+			<label for="address-country">$$label:ContryRegion$$</label>
+			<div class="fill">
+				$$input:ContryRegion$$ <em class="red">$$validation:ContryRegion$$</em></div>
+		</div>
+		<div class="column half text">
+			<label class="first-child" for="text33">$$label:PostCode$$<abbr title="Required">*</abbr> </label> $$input:PostCode$$<em class="red">$$validation:PostCode$$</em></div>
+	</div>
+	<div class="text threequarters">
+		<label class="first-child" for="text33">$$label:Country$$<abbr title="Required">*</abbr> </label> $$input:Country$$<em class="red">$$validation:Country$$</em></div>
+	<div class="text third">
+		<label class="first-child" for="text33">$$label:Phone$$<abbr title="Required">*</abbr> </label> $$input:Phone$$<em class="red">$$validation:Phone$$</em></div>
+	<div class="colgroup threequarters">
+		<div class="column half text fill">
+			<label class="first-child" for="text33">$$label:Mobile$$ </label> $$input:Mobile$$<em class="red">$$validation:Mobile$$</em></div>
+		<div class="column half text fill">
+			<label class="first-child" for="text33">$$label:Fax$$ </label> $$input:Fax$$<em class="red">$$validation:Fax$$</em></div>
+	</div>
+	<div class="text threequarters">
+		<label class="first-child" for="text33">$$label:Email$$ <abbr title="Required">*</abbr> </label> $$input:Email$$<em class="red">$$validation:Email$$</em></div>
+	<div class="text threequarters">
+		<label class="first-child" for="text33">$$label:WebSite$$ </label> $$input:WebSite$$<em class="red">$$validation:WebSite$$</em></div>
+</fieldset>
+<div class="boxout">
+	<p class="caption first-child last-child">
+		<img alt="icon-padlock" class="left first-child last-child" height="32" src="/App_Themes/DACS/_assets/icon-padlock.png" width="28" /> SSL security is used to protect the information you send us via this form. This means that your details will be private and encrypted during transmission.</p>
+</div>
+<fieldset>
+	<legend class="first-child">Your Bank details</legend><br />
+	<p>
+		These details are needed to pay your royalties to you by bank transfer</p>
+	<div class="text first">
+		<label class="first-child" for="text33"><strong>$$label:BankAccountType$$</strong> </label> $$input:BankAccountType$$<em class="red">$$validation:BankAccountType$$</em></div>
+	<fieldset>
+		<div class="text threequarters">
+			<label class="first-child" for="text33">$$label:AccountPayee$$<abbr title="Required">*</abbr> </label> $$input:AccountPayee$$<em class="red">$$validation:AccountPayee$$</em></div>
+		<div class="bankUk text third">
+			<label class="first-child" for="text33">$$label:UKSortCode$$ <abbr title="Required">*</abbr> </label>
+			<div id="ukaccount">
+				$$input:UKSortCode$$</div>
+			<em class="red">$$validation:UKSortCode$$</em></div>
+		<div class="text threequarters">
+			<label class="first-child" for="text33">$$label:AccountNumber$$ <abbr title="Required">*</abbr> </label> $$input:AccountNumber$$<em class="red">$$validation:AccountNumber$$</em></div>
+		<div class="RollNumber text threequarters">
+			<div class="text threequarters">
+				<label class="first-child" for="text33">$$label:RollNumber$$ </label></div>
+			$$input:RollNumber$$<em class="red">$$validation:RollNumber$$</em></div>
+		<div class="text threequarters">
+			<label class="first-child" for="text33">$$label:BankName$$ <abbr title="Required">*</abbr> </label> $$input:BankName$$<em class="red">$$validation:BankName$$</em></div>
+		<div class="text threequarters" cols="48" rows="8">
+			<label class="first-child" for="text33">$$label:BankAddress$$ <abbr class="valBankAddress" title="Required">*</abbr></label> $$input:BankAddress$$
+			<div class="valBankAddres">
+				<em class="red">$$validation:BankAddress$$</em></div>
+		</div>
+		<div class="text threequarters">
+			<div class="bankIN">
+				<label class="first-child" for="text33">$$label:IBAN$$ <abbr title="Required">*</abbr></label> $$input:IBAN$$ <em class="red">$$validation:IBAN$$</em></div>
+		</div>
+		<div class="text threequarters">
+			<div class="bankIN">
+				<label class="first-child" for="text33">$$label:SWIFT_BIC$$<abbr title="Required">*</abbr></label> <label class="first-child" for="text33"> </label> $$input:SWIFT_BIC$$<em class="red">$$validation:SWIFT_BIC$$</em></div>
+		</div>
+		<div class="AdditionalInfo text threequarters">
+			<div class="text threequarters">
+				<label class="first-child" for="text33">$$label:AdditionalInfo$$ </label></div>
+			$$input:AdditionalInfo$$<em class="red">$$validation:AdditionalInfo$$</em>
+			<p>
+				Please use this box to provide additional account information. For example, if your account is in the US then you will need to supply an ABA/routing number.</p>
+		</div>
+	</fieldset>
+	<legend class="first-child">Terms and conditions</legend><br />
+	<p>
+		Please read the Declaration, Mandate Statement and Privacy statement</p>
+	<textarea class="text threequarters" readonly="true" rows="20">Mandate Statement
+I hereby authorise the Design and Artists Copyright Society (&quot;DACS&quot;) exclusively to administer rights conferred on me pursuant to the Artist&#39;s Resale Right Regulations 2006 (&quot;the Regulations&quot;) in respect of artistic works (within the meaning of the Regulations) which I have created. This authorisation shall take immediate effect on my signature of this form and shall relate to the period from 14 February 2006 until terminated as set out below. I confirm that this will transfer the management of such rights to DACS, which is a collecting society as defined in the Regulations. 
+ I agree to allow DACS to collect any royalties due to me pursuant to the Artist&#39;s Resale Right Regulations 2006, and to deduct from these royalties commission at such rate as shall be determined by the board of directors of DACS from time to time, but which shall in any event not exceed 25% of the gross royalty collected by DACS for me. DACS will pay me my net royalties in accordance with its normal distribution policies adopted from time to time by its board of directors. 
+This authorisation and transfer may be terminated by me or DACS at any time by me or DACS giving the other not less than three months&#39; notice in writing of my or its wish to terminate, in which case termination shall take place upon expiration of the notice. I accept that DACS shall be entitled after termination has taken effect to charge commission for any royalties arising from resale of my work which occurred during the period that this authorisation and transfer was in force and where DACS has made a claim for such royalties in respect of those works resold by an Art Market Professional as defined in the Regulations within three months of expiration of the notice. 
+ In accordance with Section 10 of the UK Artist&rsquo;s Resale Right Regulations 2006, it is a legal requirement that for sales taking place in the UK, you must be of a qualifying national in order to be entitled to receive resale royalties (please see enclosed list of qualifying countries or see our website www.dacs.org.uk). By signing this form, you declare that you are a national of the country you state above (or the relevant qualifying country if you have dual nationality), and that you can, if so required, produce a valid copy of the relevant passport, if or when required by DACS, within 30 days of request. 
+ Please note that in order to satisfy the nationality criteria laid out in the UK Artist&rsquo;s Resale Right Regulations 2006 (Section 10 (3) (a) and (b)), a valid passport is the only documentation which will suffice. For the avoidance of doubt, citizenship, residency etc do not satisfy the nationality criteria in the UK. DACS can, and will, act accordingly on any misinformation given. If for any reason I am/we are not legally entitled to receive these royalties, I/we agree to: 
+&lt;ol&gt;
+&lt;li&gt;a. immediately return any payments the Design and Artists Copyright Society has made to me/us to which I/we are not entitled; and&lt;/li&gt; 
+ &lt;li&gt;b. indemnify the Design and Artists Copyright Society for any loss or damages it may suffer as a result of payments made to me/us pursuant to this warranty for which I am/we are not legally entitled. &lt;/li&gt;
+&lt;/ol&gt;
+ 
+&lt;h6&gt;  Data protection statement &lt;/h6&gt;
+The information you provide is securely held by the Design and Artists Copyright Society (DACS) in the organisation&rsquo;s contact database and will be treated securely and with sensitivity in accordance with the Data Protection Act 1998. This information will be used only by DACS for the purposes of providing you with information about a full range of membership services which include copyright licensing and distribution of royalties. We may also communicate with you by post, email or telephone about developments in copyright and related rights and associated services we may wish to offer in this respect. Data will not be disclosed to any external commercial organisation or third party not contracted to DACS without your individual permission. Under the terms of the Data Protection Act 1998 you can choose at any time not to receive communications from us in future.
+
+</textarea><a href="/for-artists/artists-resale-right/term-conditions" target="_blank">Open in larger window</a>
+	<fieldset>
+		<div class="options">
+			$$input:Acceptdeclaration$$ <em class="red">$$validation:Acceptdeclaration$$</em> $$input:MandateStatement$$ <em class="red">$$validation:MandateStatement$$</em>$$input:PrivacyStatement$$<em class="red">$$validation:PrivacyStatement$$</em></div>
+	</fieldset>
+	<div class="options">
+		$$input:SignUp$$<em class="red">$$validation:SignUp$$</em></div>
+</fieldset>
+<br />

@@ -1,0 +1,159 @@
+/* ============================================================
+    Themes
+============================================================ */
+.dark-grey { background: rgba(88, 89, 91, 1); }
+.medium-grey { background: rgba(128, 130, 133 ,1); }
+.light-grey { background: rgba(230, 231, 232,1); }
+.green { background: rgba(115, 201, 45,1); }
+.orange { background: rgba(238, 118, 35,1); }
+.blue { background: rgba(64, 151, 219,1); }
+
+
+
+
+
+
+/* Bare */
+.theme-bare .banner {
+    background: rgba(128, 130, 133, 1);
+}
+.boxout blockquote {
+    color: rgba(88, 89, 91, 1);
+}
+
+
+
+/* Payback Theme (Green) */
+.theme-payback ul#global-navigation ul {
+   background: rgba(115, 201, 45, 1); 
+}
+.theme-payback ul#global-navigation ul a:hover, 
+.theme-payback ul#global-navigation ul a:focus {
+    background: rgba(195, 231, 166, 1); 
+    color: rgba(88, 89, 91, 1);
+}
+.theme-payback .overlay {
+    background: rgba(115, 201, 45, 1);
+}
+
+/* Artist's Resale Rights Theme (Orange) */
+.theme-arr ul#global-navigation ul,
+.theme-digital ul#global-navigation ul {
+   background: rgba(238, 118, 35,1); 
+}
+.theme-arr ul#global-navigation ul a:hover, 
+.theme-arr ul#global-navigation ul a:focus,
+.theme-digital ul#global-navigation ul a:hover,
+.theme-digital ul#global-navigation ul a:focus {
+    background: rgba(248, 189, 148, 1); 
+    color: rgba(88, 89, 91, 1);
+}
+.theme-arr .overlay,
+.theme-digital .overlay {
+    background: rgba(238, 118, 35, 1);
+}
+
+/* Copyright Licensing Theme (Blue) */
+.theme-cl ul#global-navigation ul,
+.theme-bokeh ul#global-navigation ul {
+   background: rgba(64, 151, 219, 1); 
+}
+.theme-cl ul#global-navigation ul a:hover, 
+.theme-cl ul#global-navigation ul a:focus,
+.theme-bokeh ul#global-navigation ul a:hover,
+.theme-bokeh ul#global-navigation ul a:focus {
+    background: rgba(171, 210, 240, 1); 
+    color: rgba(88, 89, 91, 1);
+}
+.theme-cl .overlay,
+.theme-bokeh .overlay {
+    background: rgba(64, 151, 219, 1);
+}
+
+
+
+
+
+
+
+/* Bokeh 
+.theme-bokeh .banner {
+    
+}
+.theme-bokeh .overlay {
+    background-color:#794C79;
+    background-color:rgba(121,76,121,0.9);
+}
+.theme-bokeh .boxout blockquote {
+    color:#636;
+}
+*/
+/* Digital 
+.theme-digital .banner {
+    
+}
+.theme-digital .overlay {
+    background-color:#990304;
+    background-color:rgba(153,3,64,0.9);
+}
+.theme-digital .boxout blockquote {
+    color:#b05;
+}*/
+
+/* Oil 
+.theme-oil .banner {
+
+}
+.theme-oil .overlay {
+    background-color:#078;
+    background-color:rgba(0,119,136,0.9);
+}
+.theme-oil .boxout blockquote {
+    color:#079;
+}*/
+
+/* Watercolour 
+.theme-watercolour ul#global-navigation ul {
+   background: rgba(115, 201, 45, 1); 
+}
+.theme-watercolour ul#global-navigation ul a:hover, 
+.theme-watercolour ul#global-navigation ul a:focus{
+    background: rgba(195, 231, 166, 1); 
+    color:rgba(88, 89, 91, 1);
+}
+
+.theme-watercolour .banner {
+    
+}
+.theme-watercolour .overlay {
+    background: rgba(115, 201, 45,1);
+}
+.theme-watercolour .boxout blockquote {
+    color:#780;
+}*/
+
+.TVRelevantRights label{
+    padding-left:10px;
+}
+
+.info-container
+{
+    padding-left:10px;
+}
+
+/*.MultiFileUploader > div
+{
+    border:1px solid green;
+    width:100px;
+}
+
+.MultiFileUploader > div > div {
+    padding-top: 15px;
+}*/
+/*.MultiFileUploader > div > div {
+    display:none;
+}
+
+.MultiFileUploader input {
+    width: 100% !important;
+}*/

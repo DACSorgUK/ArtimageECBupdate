@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B0A773CA-C794-4D63-A4ED-7D032BF5224B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DacsOnline.Model</RootNamespace>
+    <AssemblyName>DacsOnline.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.0.4.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\DacsOnlineLocal\packages\AutoMapper.4.0.4\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CMS.CMSHelper">
+      <HintPath>..\Reference Dependencies\CMS.CMSHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.DataEngine, Version=6.0.4463.26620, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Dependencies\CMS.DataEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.EmailEngine">
+      <HintPath>..\Reference Dependencies\CMS.EmailEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.EventLog">
+      <HintPath>..\Reference Dependencies\CMS.EventLog.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.GlobalHelper">
+      <HintPath>..\Reference Dependencies\CMS.GlobalHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.SettingsProvider">
+      <HintPath>..\Reference Dependencies\CMS.SettingsProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.SiteProvider">
+      <HintPath>..\Reference Dependencies\CMS.SiteProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="CMS.Synchronization">
+      <HintPath>..\Reference Dependencies\CMS.Synchronization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\Reference Dependencies\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\Reference Dependencies\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\Reference Dependencies\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\Reference Dependencies\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration">
+      <HintPath>..\Reference Dependencies\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\DacsOnlineLocal\packages\RestSharp.105.2.3\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO, Version=2.6.9.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\DacsOnlineLocal\packages\Microsoft.Bcl.1.1.9\lib\net40\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=2.6.9.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\DacsOnlineLocal\packages\Microsoft.Bcl.1.1.9\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Threading.Tasks, Version=2.6.9.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\DacsOnlineLocal\packages\Microsoft.Bcl.1.1.9\lib\net40\System.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adadpters\MailChimpAdapter.cs" />
+    <Compile Include="Adadpters\WebCacheAdapter.cs" />
+    <Compile Include="Business Objects\Artist.cs" />
+    <Compile Include="Business Objects\CopyrightLicencingFormdata.cs" />
+    <Compile Include="Business Objects\CopyRightLicencingProduct.cs" />
+    <Compile Include="Business Objects\CopyRightLicencingProductReproductions.cs" />
+    <Compile Include="Business Objects\Document.cs" />
+    <Compile Include="Business Objects\Nationality.cs" />
+    <Compile Include="Business Objects\SalesFormData.cs" />
+    <Compile Include="Business Objects\SalesInformationData.cs" />
+    <Compile Include="Enums\ARRConfirmedNationalityType.cs" />
+    <Compile Include="Enums\ARRMembershipType.cs" />
+    <Compile Include="Enums\ARRPaidRoyalties.cs" />
+    <Compile Include="Enums\ArtistNationality.cs" />
+    <Compile Include="Enums\CacheType.cs" />
+    <Compile Include="Enums\CLFullConsultationType.cs" />
+    <Compile Include="Enums\CLMemebershipType.cs" />
+    <Compile Include="Enums\CurrancyType.cs" />
+    <Compile Include="Enums\MessageType.cs" />
+    <Compile Include="Manager\AllArtistDetailsManager.cs" />
+    <Compile Include="Manager\ARRArtistSearchManager.cs" />
+    <Compile Include="Manager\ArtistDetailsManager.cs" />
+    <Compile Include="Manager\ArtMarketSalesFormServiceManager.cs" />
+    <Compile Include="Manager\BaseManager.cs" />
+    <Compile Include="Manager\CalculatorManager.cs" />
+    <Compile Include="Manager\CLArtistSearchManager.cs" />
+    <Compile Include="Manager\CopyRightLicencingFormServiceManager.cs" />
+    <Compile Include="Manager\DocumentListManager.cs" />
+    <Compile Include="Manager\ExchangeManager.cs" />
+    <Compile Include="Manager\Interfaces\IAllArtistDetailsManager.cs" />
+    <Compile Include="Manager\Interfaces\IAllArtistSearchManager.cs" />
+    <Compile Include="Manager\Interfaces\IArtistDetailsManager.cs" />
+    <Compile Include="Manager\Interfaces\ICLArtistSearchManager.cs" />
+    <Compile Include="Manager\Interfaces\IARRArtistSearchManager.cs" />
+    <Compile Include="Manager\Interfaces\ICache.cs" />
+    <Compile Include="Manager\Interfaces\ICopyRightLicencingFormServiceManager.cs" />
+    <Compile Include="Manager\Interfaces\IArtMarketSalesFormServiceManager.cs" />
+    <Compile Include="Manager\Interfaces\ICalculatorManager.cs" />
+    <Compile Include="Manager\Interfaces\IDocumentationListManager.cs" />
+    <Compile Include="Manager\Interfaces\IExchangeManager.cs" />
+    <Compile Include="Manager\Interfaces\ISubscribeEmail.cs" />
+    <Compile Include="Manager\MailChimpApi.cs" />
+    <Compile Include="Manager\SAPApi.cs" />
+    <Compile Include="Models\ArtistCombined.cs" />
+    <Compile Include="Models\ArtistARRModel.cs" />
+    <Compile Include="Models\ArtistCLModel.cs" />
+    <Compile Include="Models\ArtistDetailsModel.cs" />
+    <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Manager\Interfaces\IBaseManager.cs" />
+    <Compile Include="RepostioriesInterfaces\IARRArtistSearchRepository.cs" />
+    <Compile Include="RepostioriesInterfaces\IArtistDetailsRepository.cs" />
+    <Compile Include="RepostioriesInterfaces\ICopyRightLicencingFormRepository.cs" />
+    <Compile Include="RepostioriesInterfaces\IArtMarketSalesFormRepository.cs" />
+    <Compile Include="RepostioriesInterfaces\IDocumentRepository.cs" />
+    <Compile Include="RepostioriesInterfaces\IExchangeRepository.cs" />
+    <Compile Include="Service References\DACSArtistSearchWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ExtentionMethods.cs" />
+    <Compile Include="Utilities\Interfaces\IEventLogService.cs" />
+    <Compile Include="Utilities\NullLogger.cs" />
+    <Compile Include="Utilities\ConstantData.cs" />
+    <Compile Include="Utilities\SendEmail.cs" />
+    <Compile Include="Utilities\Validation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enumerators\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Service References\DACSArtistSearchWebService\DACSAccess1.wsdl" />
+    <None Include="Service References\DACSArtistSearchWebService\DacsOnline.Model.DACSArtistSearchWebService.DACSArtist.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DACSArtistSearchWebService\DacsOnline.Model.DACSArtistSearchWebService.DACSAtristList.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DACSArtistSearchWebService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DACSArtistSearchWebService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DACSArtistSearchWebService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DACSArtistSearchWebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DACSArtistSearchWebService\DACSAccess1.disco" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\DacsOnlineLocal\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\DacsOnlineLocal\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\DacsOnlineLocal\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\DacsOnlineLocal\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
